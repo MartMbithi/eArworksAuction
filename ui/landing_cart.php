@@ -256,7 +256,7 @@ require_once('../app/partials/landing_head.php');
                                             <a href="?action=empty" class="btn btn-danger">Clear Cart</a>
                                             <!-- Hide This Please -->
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#checkout_modal">
-                                                Checkout
+                                                Place Bid
                                             </button>
                                         </div>
                                     <?php } ?>
