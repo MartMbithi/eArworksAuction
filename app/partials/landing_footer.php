@@ -8,7 +8,7 @@
                             <div class="ec-footer-logo">
                                 <a href="../">
                                     <h2>
-                                        eArtworks
+                                        eArworksAuction
                                     </h2>
                                 </a>
                             </div>
@@ -137,8 +137,8 @@
                     <div class="col text-center footer-copy">
                         <div class="footer-bottom-copy">
                             <div class="ec-copy">
-                                Copyright © 2022 - <?php echo date('Y'); ?>
-                                <a class="site-name text-upper" href="https://martmbithi.github.io">eArtworks<span>.</span></a>. All Rights Reserved
+                                Copyright © <?php echo date('Y'); ?>
+                                <a class="site-name text-upper" href="#">eArworksAuction<span>.</span></a>
                             </div>
                         </div>
                     </div>

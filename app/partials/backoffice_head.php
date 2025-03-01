@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="eArtstore - The Ultimate Artworks Online Store.">
 
-    <title>eArtworks - The Ultimate Painting And Artworks Store.</title>
+    <title>eArworksAuction - The Ultimate Painting And Artworks Store.</title>
 
     <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
