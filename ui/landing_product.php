@@ -89,14 +89,14 @@ require_once('../app/partials/landing_head.php');
                 <div class="col-12">
                     <div class="row ec_breadcrumb_inner">
                         <div class="col-md-6 col-sm-12">
-                            <h2 class="ec-breadcrumb-title">Single Product</h2>
+                            <h2 class="ec-breadcrumb-title">Artwork</h2>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <!-- ec-breadcrumb-list start -->
                             <ul class="ec-breadcrumb-list">
                                 <li class="ec-breadcrumb-item"><a href="../">Home</a></li>
-                                <li class="ec-breadcrumb-item"><a href="../">Products</a></li>
-                                <li class="ec-breadcrumb-item active">Product</li>
+                                <li class="ec-breadcrumb-item"><a href="../">Artworks</a></li>
+                                <li class="ec-breadcrumb-item active">Artwork</li>
                             </ul>
                             <!-- ec-breadcrumb-list end -->
                         </div>
@@ -251,9 +251,9 @@ require_once('../app/partials/landing_head.php');
             <div class="row">
                 <div class="col-md-12 text-center">
                     <div class="section-title">
-                        <h2 class="ec-bg-title">Related products</h2>
-                        <h2 class="ec-title">Related products</h2>
-                        <p class="sub-title">Browse The Collection of Top Products</p>
+                        <h2 class="ec-bg-title">Related Artworks</h2>
+                        <h2 class="ec-title">Related Artworks</h2>
+                        <p class="sub-title">Browse The Collection of Top Artworks</p>
                     </div>
                 </div>
             </div>

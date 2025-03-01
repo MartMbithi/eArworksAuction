@@ -347,7 +347,8 @@ if ($_SESSION['user_access_level'] == 'Customer') {
                                         <?php } ?>
                                     </ul>
                                 </li>
-                                <li><a href="landing_products">Products</a></li>
+                                <li><a href="landing_products">Artworks</a></li>
+                                <li><a href="landing_my_bids">My Bids</a></li>
                             </ul>
                         </div>
                     </div>
@@ -385,7 +386,7 @@ if ($_SESSION['user_access_level'] == 'Customer') {
                                 <?php } ?>
                             </ul>
                         </li>
-                        <li><a href="landing_products">Products</a></li>
+                        <li><a href="landing_products">Artworks</a></li>
                     </ul>
                 </div>
                 <div class="header-res-lan-curr">
@@ -641,7 +642,7 @@ if ($_SESSION['user_access_level'] == 'Customer') {
                                         <?php } ?>
                                     </ul>
                                 </li>
-                                <li><a href="landing_products">Products</a></li>
+                                <li><a href="landing_products">Artworks</a></li>
                                 <li><a href="register">Register</a></li>
                                 <li><a href="login">Login</a></li>
                             </ul>
@@ -681,7 +682,7 @@ if ($_SESSION['user_access_level'] == 'Customer') {
                                 <?php } ?>
                             </ul>
                         </li>
-                        <li><a href="landing_products">Products</a></li>
+                        <li><a href="landing_products">Artworks</a></li>
                     </ul>
                 </div>
                 <div class="header-res-lan-curr">
