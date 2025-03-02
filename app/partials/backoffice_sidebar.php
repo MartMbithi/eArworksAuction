@@ -110,6 +110,22 @@ if ($user_access_level == 'Administrator') {
                         </div>
                     </li>
 
+                    <!-- Sellers -->
+                    <li class="has-sub">
+                        <a class="sidenav-item-link" href="javascript:void(0)">
+                            <i class="mdi mdi-account-group-outline"></i>
+                            <span class="nav-text">Sellers</span> <b class="caret"></b>
+                        </a>
+                        <div class="collapse">
+                            <ul class="sub-menu" id="users" data-parent="#sidebar-menu">
+                                <li class="">
+                                    <a class="sidenav-item-link" href="backoffice_manage_sellers">
+                                        <span class="nav-text">Manage Sellers</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                     <!-- Customers -->
                     <li class="has-sub">
                         <a class="sidenav-item-link" href="javascript:void(0)">
