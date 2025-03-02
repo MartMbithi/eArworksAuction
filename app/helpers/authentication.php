@@ -77,7 +77,7 @@ if (isset($_POST['User_Login'])) {
     $user_password = sha1(md5(mysqli_real_escape_string($mysqli, $_POST['user_password'])));
 
     $ret = mysqli_query($mysqli, "SELECT * FROM users 
-    WHERE user_email = '{$user_email}' AND user_password = '{$user_password}' AND user_delete_status != '1'");
+    WHERE user_email = '{$user_email}' AND user_password = '{$user_password}' AND user_delete_status != '1' AND  user_account_status = 'Active'");
     $num = mysqli_fetch_array($ret);
     if ($num > 0) {
         /* Persist Sessions */
@@ -158,7 +158,7 @@ if (isset($_POST['User_Login'])) {
             }
         }
     } else {
-        $err = "Failed! Invalid Login Credentials";
+        $err = "Failed! Invalid Login Credentials or Your account is not verified";
     }
 }
 

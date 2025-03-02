@@ -175,7 +175,7 @@ require_once('../app/partials/backoffice_head.php');
 
                                     <div class="modal-footer px-4">
                                         <button type="button" class="btn btn-secondary btn-pill" data-bs-dismiss="modal">Cancel</button>
-                                        <button type="submit" name="Register_New_Customer" class="btn btn-primary btn-pill">Register Customer</button>
+                                        <button type="submit" name="Register_New_Customer" class="btn btn-primary btn-pill">Register Seller</button>
                                     </div>
                                 </form>
                             </div>
