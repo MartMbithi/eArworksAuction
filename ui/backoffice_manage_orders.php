@@ -94,11 +94,11 @@ require_once('../app/partials/backoffice_head.php');
                 <div class="content">
                     <div class="breadcrumb-wrapper breadcrumb-contacts">
                         <div>
-                            <h1>Orders</h1>
+                            <h1>Bids</h1>
                             <p class="breadcrumbs">
                                 <span><a href="dashboard">Home</a></span>
-                                <span><i class="mdi mdi-chevron-right"></i></span><a href="backoffice_manage_orders">Orders</a>
-                                <span><i class="mdi mdi-chevron-right"></i></span>Manage Orders
+                                <span><i class="mdi mdi-chevron-right"></i></span><a href="backoffice_manage_orders">Bids</a>
+                                <span><i class="mdi mdi-chevron-right"></i></span>Manage Bids
                             </p>
                         </div>
                         <div>
@@ -114,7 +114,7 @@ require_once('../app/partials/backoffice_head.php');
                             <div class="modal-content">
                                 <form method="POST" enctype="multipart/form-data">
                                     <div class="modal-header px-4">
-                                        <h5 class="modal-title" id="exampleModalCenterTitle">Register New Order</h5>
+                                        <h5 class="modal-title" id="exampleModalCenterTitle">Register New Bid</h5>
                                     </div>
 
                                     <div class="modal-body px-4">
@@ -160,7 +160,7 @@ require_once('../app/partials/backoffice_head.php');
                                                 <div class="form-group">
                                                     <label for="lastName">Order Status</label>
                                                     <select type="text" required class="form-control" name="order_status">
-                                                        <option value="Placed Orders">Order Placed</option>
+                                                        <option value="Placed Bid">Bid Placed</option>
                                                         <option>Awaiting Fullfilment</option>
                                                         <option>Shipped</option>
                                                         <option>Out For Delivery</option>
@@ -194,10 +194,10 @@ require_once('../app/partials/backoffice_head.php');
                                         <table id="responsive-data-table" class="table">
                                             <thead>
                                                 <tr>
-                                                    <th>Order Code</th>
+                                                    <th>Bid Code</th>
                                                     <th>Customer Details</th>
-                                                    <th>Order Items</th>
-                                                    <th>Order Status</th>
+                                                    <th>Items</th>
+                                                    <th>Status</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -247,7 +247,7 @@ require_once('../app/partials/backoffice_head.php');
                                                             <td>
                                                                 <?php
                                                                 if ($orders['order_status'] == 'Placed Orders') { ?>
-                                                                    <span class="badge badge-warning">Order Placed</span>
+                                                                    <span class="badge badge-warning">Bid Placed</span>
                                                                 <?php } else if ($orders['order_status'] == 'Awaiting Fullfilment') { ?>
                                                                     <span class="badge badge-warning">Awaiting Fulfillment</span>
                                                                 <?php } else if ($orders['order_status'] == 'Shipped') { ?>
