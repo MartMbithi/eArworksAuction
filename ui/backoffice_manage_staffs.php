@@ -133,9 +133,14 @@ require_once('../app/partials/backoffice_head.php');
                                                 </div>
                                             </div>
 
-                                            <div class="form-group col-lg-12">
+                                            <div class="form-group col-lg-6">
                                                 <label for="email">Email</label>
                                                 <input type="email" required class="form-control" name="user_email">
+                                            </div>
+
+                                            <div class="form-group col-lg-6">
+                                                <label for="email">Default Password </label>
+                                                <input type="text" value="Demo@123" required class="form-control" name="user_email">
                                             </div>
 
                                             <div class="form-group col-lg-4">
