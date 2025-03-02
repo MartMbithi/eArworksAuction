@@ -256,6 +256,20 @@ if (isset($_POST['Customer_2FA'])) {
     }
 }
 
+/* Global Acoount Verifier */
+if (isset($_POST['Verify_Account'])) {
+    $user_id = mysqli_real_escape_string($mysqli, $_POST['user_id']);
+    /* Verify Account */
+    if (mysqli_query(
+        $mysqli,
+        "UPDATE users SET user_account_status = 'Active' WHERE user_id = '{$user_id}'"
+    )) {
+        $success = "Account Verified";
+    } else {
+        $err = "Failed, Please Try Again";
+    }
+}
+
 /* __________________________________________________________________________________________________ */
 
 /* STAFF HELPERS */
