@@ -1221,7 +1221,7 @@ if (isset($_POST['Generate_Payments_Reports'])) {
 
 
 /* Sellers */
-if ($module == 'Customers') {
+if ($module == 'Sellers') {
     if ($type == 'PDF') {
         /* Generate Customers Reports In PDF */
         $html = '
