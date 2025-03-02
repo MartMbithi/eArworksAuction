@@ -189,6 +189,7 @@ require_once('../app/partials/backoffice_head.php');
                                                     <th>Email</th>
                                                     <th>Phone</th>
                                                     <th>DOB</th>
+                                                    <th>Status</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -211,6 +212,7 @@ require_once('../app/partials/backoffice_head.php');
                                                             <td><?php echo $customers['user_email']; ?></td>
                                                             <td><?php echo $customers['user_phone_number']; ?></td>
                                                             <td><?php echo date('M d Y', strtotime($customers['user_dob'])); ?></td>
+                                                            <td><?php echo $customers['user_account_status']; ?></td>
                                                             <td>
                                                                 <div class="btn-group mb-1">
                                                                     <button type="button" class="btn btn-outline-success">Manage</button>
@@ -220,6 +222,9 @@ require_once('../app/partials/backoffice_head.php');
 
                                                                     <div class="dropdown-menu">
                                                                         <a class="dropdown-item" href="backoffice_manage_customer?view=<?php echo $customers['user_id']; ?>">View</a>
+                                                                        <?php if ($customers['user_account_status'] != 'Active') { ?>
+                                                                            <a class="dropdown-item" data-bs-toggle="modal" href="#verify_<?php echo $customers['user_id']; ?>">Verify Account</a>
+                                                                        <?php } ?>
                                                                         <a class="dropdown-item" data-bs-toggle="modal" href="#delete_staff_<?php echo $customers['user_id']; ?>">Delete</a>
                                                                     </div>
                                                                 </div>
