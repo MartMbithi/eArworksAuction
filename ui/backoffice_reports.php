@@ -123,12 +123,12 @@ require_once('../app/partials/backoffice_head.php');
                                 <div class="card card-default">
                                     <div class="card-body text-center p-24px">
                                         <div class="image mb-3">
-                                            <img src="../public/backoffice_assets/img/customer.png" class="img-fluid rounded-circle" alt="Avatar Image">
+                                            <img src="../public/backoffice_assets/img/seller.png" class="img-fluid rounded-circle" alt="Avatar Image">
                                         </div>
-                                        <h5 class="card-title text-dark">Customers</h5>
+                                        <h5 class="card-title text-dark">Sellers</h5>
                                         <p class="item-count">
-                                            <a href="backoffice_generate_reports?type=PDF&module=Customers" class="btn btn-primary btn-sm">PDF</a>
-                                            <a href="backoffice_generate_reports?type=CSV&module=Customers" class="btn btn-primary btn-sm">CSV</a>
+                                            <a href="backoffice_generate_reports?type=PDF&module=Sellers" class="btn btn-primary btn-sm">PDF</a>
+                                            <a href="backoffice_generate_reports?type=CSV&module=Sellers" class="btn btn-primary btn-sm">CSV</a>
                                         </p>
                                     </div>
                                 </div>
@@ -138,12 +138,12 @@ require_once('../app/partials/backoffice_head.php');
                                 <div class="card card-default">
                                     <div class="card-body text-center p-24px">
                                         <div class="image mb-3">
-                                            <img src="../public/backoffice_assets/img/categories.png" class="img-fluid rounded-circle" alt="Avatar Image">
+                                            <img src="../public/backoffice_assets/img/customer.png" class="img-fluid rounded-circle" alt="Avatar Image">
                                         </div>
-                                        <h5 class="card-title text-dark">Categories</h5>
+                                        <h5 class="card-title text-dark">Customers</h5>
                                         <p class="item-count">
-                                            <a href="backoffice_generate_reports?type=PDF&module=Categories" class="btn btn-primary btn-sm">PDF</a>
-                                            <a href="backoffice_generate_reports?type=CSV&module=Categories" class="btn btn-primary btn-sm">CSV</a>
+                                            <a href="backoffice_generate_reports?type=PDF&module=Customers" class="btn btn-primary btn-sm">PDF</a>
+                                            <a href="backoffice_generate_reports?type=CSV&module=Customers" class="btn btn-primary btn-sm">CSV</a>
                                         </p>
                                     </div>
                                 </div>
