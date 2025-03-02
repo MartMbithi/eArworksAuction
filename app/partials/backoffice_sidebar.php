@@ -101,12 +101,6 @@ if ($user_access_level == 'Administrator') {
                         </a>
                         <div class="collapse">
                             <ul class="sub-menu" id="users" data-parent="#sidebar-menu">
-                                <li>
-                                    <a class="sidenav-item-link" href="backoffice_import_users">
-                                        <span class="nav-text">Bulk Import</span>
-                                    </a>
-                                </li>
-
                                 <li class="">
                                     <a class="sidenav-item-link" href="backoffice_manage_staffs">
                                         <span class="nav-text">Manage Staffs</span>
@@ -124,12 +118,6 @@ if ($user_access_level == 'Administrator') {
                         </a>
                         <div class="collapse">
                             <ul class="sub-menu" id="users" data-parent="#sidebar-menu">
-                                <li>
-                                    <a class="sidenav-item-link" href="backoffice_import_customers">
-                                        <span class="nav-text">Bulk Import</span>
-                                    </a>
-                                </li>
-
                                 <li class="">
                                     <a class="sidenav-item-link" href="backoffice_manage_customers">
                                         <span class="nav-text">Manage Customers</span>
@@ -149,11 +137,6 @@ if ($user_access_level == 'Administrator') {
                         <div class="collapse">
                             <ul class="sub-menu" id="categorys" data-parent="#sidebar-menu">
                                 <li class="">
-                                    <a class="sidenav-item-link" href="backoffice_import_categories">
-                                        <span class="nav-text">Bulk Import</span>
-                                    </a>
-                                </li>
-                                <li class="">
                                     <a class="sidenav-item-link" href="backoffice_manage_categories">
                                         <span class="nav-text">Manage Categories</span>
                                     </a>
@@ -170,11 +153,6 @@ if ($user_access_level == 'Administrator') {
                         </a>
                         <div class="collapse">
                             <ul class="sub-menu" id="products" data-parent="#sidebar-menu">
-                                <li class="">
-                                    <a class="sidenav-item-link" href="backoffice_import_products">
-                                        <span class="nav-text">Bulk Import</span>
-                                    </a>
-                                </li>
                                 <li class="">
                                     <a class="sidenav-item-link" href="backoffice_manage_products">
                                         <span class="nav-text">Manage Products</span>
@@ -214,11 +192,6 @@ if ($user_access_level == 'Administrator') {
                         </a>
                         <div class="collapse">
                             <ul class="sub-menu" id="settings" data-parent="#sidebar-menu">
-                                <li class="">
-                                    <a class="sidenav-item-link" href="backoffice_settings_mailer">
-                                        <span class="nav-text">Mailer API</span>
-                                    </a>
-                                </li>
                                 <li class="">
                                     <a class="sidenav-item-link" href="backoffice_settings_api">
                                         <span class="nav-text">Thirdparty APIs</span>
