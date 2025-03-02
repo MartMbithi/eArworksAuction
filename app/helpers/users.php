@@ -86,7 +86,7 @@ if (isset($_POST['Register_New_Customer'])) {
     $user_phone_number  = mysqli_real_escape_string($mysqli, $_POST['user_phone_number']);
     $user_default_address  = mysqli_real_escape_string($mysqli, $_POST['user_default_address']);
     $user_access_level  = mysqli_real_escape_string($mysqli, $_POST['user_access_level']);
-    $user_password = sha1(md5(mysqli_real_escape_string($mysqli, 'Demo123@'))); /* Default User Password - Update This Password */
+    $user_password = sha1(md5(mysqli_real_escape_string($mysqli, $_POST['user_password']))); /* Default User Password - Update This Password */
     if (!empty($_FILES['user_profile_picture']['name'])) {
         /* Process User Image */
         $temp_user_image = explode('.', $_FILES['user_profile_picture']['name']);
@@ -275,7 +275,7 @@ if (isset($_POST['Register_New_Staff'])) {
     $user_phone_number  = mysqli_real_escape_string($mysqli, $_POST['user_phone_number']);
     $user_default_address  = mysqli_real_escape_string($mysqli, $_POST['user_default_address']);
     $user_access_level  = mysqli_real_escape_string($mysqli, $_POST['user_access_level']);
-    $user_password = sha1(md5(mysqli_real_escape_string($mysqli, 'Demo123@'))); /* Default User Password - Update This Password */
+    $user_password = sha1(md5(mysqli_real_escape_string($mysqli, $_POST['user_password']))); /* Default User Password - Update This Password */
     /* Process User Image */
     $temp_user_image = explode('.', $_FILES['user_profile_picture']['name']);
     $new_user_image = $user_access_level . '_' . (round(microtime(true)) . '.' . end($temp_user_image));

@@ -107,8 +107,8 @@ if (mysqli_num_rows($customer_sql) > 0) {
                                     <h1><?php echo $customer['user_access_level']; ?> Profile</h1>
                                     <p class="breadcrumbs">
                                         <span><a href="dashboard">Home</a></span>
-                                        <span><i class="mdi mdi-chevron-right"></i></span><a href="backoffice_manage_customers">Sellers</a>
-                                        <span><i class="mdi mdi-chevron-right"></i></span><a href="backoffice_manage_customers">Manage Sellers</a>
+                                        <span><i class="mdi mdi-chevron-right"></i></span><a href="backoffice_manage_sellers">Sellers</a>
+                                        <span><i class="mdi mdi-chevron-right"></i></span><a href="backoffice_manage_sellers">Manage Sellers</a>
                                         <span><i class="mdi mdi-chevron-right"></i><?php echo $customer['user_first_name'] . ' ' . $customer['user_last_name']; ?></span>
                                     </p>
                                 </div>
