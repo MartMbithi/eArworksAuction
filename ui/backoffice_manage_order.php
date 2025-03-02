@@ -116,7 +116,7 @@ if (mysqli_num_rows($product_sql) > 0) {
                                     </h1>
                                     <?php
                                     if ($product['order_status'] == 'Placed Orders') { ?>
-                                        <span class="badge badge-warning">Order Placed</span>
+                                        <span class="badge badge-warning">Bid Placed</span>
                                     <?php } else if ($product['order_status'] == 'Awaiting Fullfilment') { ?>
                                         <span class="badge badge-warning">Awaiting Fulfillment</span>
                                     <?php } else if ($product['order_status'] == 'Shipped') { ?>
@@ -130,8 +130,8 @@ if (mysqli_num_rows($product_sql) > 0) {
                                     <?php } ?>
                                     <p class="breadcrumbs">
                                         <span><a href="dashboard">Home</a></span>
-                                        <span><i class="mdi mdi-chevron-right"></i></span><a href="backoffice_manage_orders">Orders</a>
-                                        <span><i class="mdi mdi-chevron-right"></i></span><a href="backoffice_manage_orders">Manage Orders</a>
+                                        <span><i class="mdi mdi-chevron-right"></i></span><a href="backoffice_manage_orders">Bids</a>
+                                        <span><i class="mdi mdi-chevron-right"></i></span><a href="backoffice_manage_orders">Manage Bids</a>
                                         <span><i class="mdi mdi-chevron-right"></i><?php echo $product['order_code']; ?></span>
                                     </p>
                                 </div>
@@ -159,7 +159,7 @@ if (mysqli_num_rows($product_sql) > 0) {
                                         <div class="profile-content-right profile-right-spacing py-5">
                                             <ul class="nav nav-tabs px-3 px-xl-5 nav-style-border" id="myProfileTab" role="tablist">
                                                 <li class="nav-item" role="presentation">
-                                                    <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="true">Items In The Order Details</button>
+                                                    <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="true">Items In The Bid Details</button>
                                                 </li>
 
                                                 <li class="nav-item" role="presentation">
@@ -251,7 +251,7 @@ if (mysqli_num_rows($product_sql) > 0) {
 
                                                                 <?php } else { ?>
                                                                     <tr>
-                                                                        <th scope="row">No Items In Your Order</th>
+                                                                        <th scope="row">No Items In Your Bid</th>
                                                                     </tr>
                                                                 <?php } ?>
                                                             </tbody>
