@@ -167,7 +167,9 @@ require_once('../app/partials/landing_head.php');
                                                     <td><span><?php echo $orders['bid_qty']; ?></span></td>
                                                     <td><span>Ksh <?php echo number_format($orders['bid_price'], 2); ?></span></td>
                                                     <td><span><?php echo $orders['bid_status']; ?></span></td>
-                                                    <td><span class="tbl-btn"><a class="btn btn-lg btn-primary" href="landing_product?view=<?php echo $orders['product_id']; ?>&category=<?php echo $orders['product_category_id']; ?>">View</a></span></td>
+                                                    <td>
+                                                        <span class="tbl-btn"><a class="btn btn-lg btn-primary" href="landing_product?view=<?php echo $orders['product_id']; ?>&category=<?php echo $orders['product_category_id']; ?>">View</a></span>
+                                                    </td>
                                                 </tr>
                                             <?php  }
                                         } else { ?>
