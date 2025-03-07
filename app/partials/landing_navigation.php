@@ -168,16 +168,9 @@ if ($_SESSION['user_access_level'] == 'Customer') {
                                 </ul>
                             </div>
                             <!-- Header User End -->
-                            <!-- Header Cart Start -->
-                            <a href="landing_wishlist" class="ec-header-btn ec-header-wishlist">
-                                <div class="header-icon">
-                                    <img src="../public/landing_assets/images/icons/wishlist.svg" class="svg_img header_svg" alt="" />
-                                </div>
-                                <span class="ec-header-count"><?php echo $items_in_my_wishlist; ?></span>
-                            </a>
                             <!-- Header Cart End -->
                             <!-- Header Cart Start -->
-                            <a href="landing_cart" class="ec-header-btn">
+                            <a href="landing_my_bids" class="ec-header-btn">
                                 <div class="header-icon">
                                     <img src="../public/landing_assets/images/icons/cart.svg" class="svg_img header_svg" alt="" />
                                 </div>
@@ -186,15 +179,6 @@ if ($_SESSION['user_access_level'] == 'Customer') {
                             <!-- Header menu Start -->
                             <a href="#ec-mobile-menu" class="ec-header-btn ec-side-toggle d-lg-none">
                                 <img src="../public/landing_assets/images/icons/menu.svg" class="svg_img header_svg" alt="icon" />
-                                <span class="ec-header-count">
-                                    <?php
-                                    /* Count Number Of Items In My Cart */
-                                    if (isset($_SESSION['cart_item'])) {
-                                        echo sizeof($_SESSION["cart_item"]);
-                                    } else {
-                                        echo "0";
-                                    } ?>
-                                </span>
                             </a>
                             <!-- Header menu End -->
                         </div>
@@ -237,27 +221,22 @@ if ($_SESSION['user_access_level'] == 'Customer') {
                         <!-- Ec Header Button Start -->
                         <div class="align-self-center">
                             <div class="ec-header-bottons">
-
-                                <!-- Header wishlist Start -->
-                                <a href="landing_wishlist" class="ec-header-btn ec-header-wishlist">
-                                    <div class="header-icon">
-                                        <img src="../public/landing_assets/images/icons/wishlist.svg" class="svg_img header_svg" alt="" />
-                                    </div>
-                                    <span class="ec-header-count"><?php echo $items_in_my_wishlist; ?></span>
-                                </a>
-                                <!-- Header wishlist End -->
                                 <!-- Header Cart Start -->
-                                <a href="landing_cart" class="ec-header-btn">
+                                <a href="landing_my_bids" class="ec-header-btn">
                                     <div class="header-icon">
                                         <img src="../public/landing_assets/images/icons/cart.svg" class="svg_img header_svg" alt="" />
                                         <span class="ec-header-count">
                                             <?php
-                                            /* Count Number Of Items In My Cart */
-                                            if (isset($_SESSION['cart_item'])) {
-                                                echo sizeof($_SESSION["cart_item"]);
-                                            } else {
-                                                echo "0";
-                                            } ?>
+                                            /* Get All Items In My Bids Un Processed */
+                                            $user_id = mysqli_real_escape_string($mysqli, $_SESSION['user_id']);
+                                            $query = "SELECT COUNT(*)  FROM bids WHERE bid_user_id = '{$user_id}' AND bid_status = 'Pending'";
+                                            $stmt = $mysqli->prepare($query);
+                                            $stmt->execute();
+                                            $stmt->bind_result($items_in_my_bids);
+                                            $stmt->fetch();
+                                            $stmt->close();
+                                            echo $items_in_my_bids;
+                                            ?>
                                         </span>
                                     </div>
                                 </a>
