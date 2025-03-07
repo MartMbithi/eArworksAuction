@@ -70,6 +70,7 @@ require_once('../app/settings/config.php');
 require_once('../app/settings/codeGen.php');
 require_once('../app/settings/checklogin.php');
 require_once('../app/helpers/landing.php');
+require_once('../app/helpers/bids.php');
 require_once('../app/partials/landing_head.php');
 ?>
 
@@ -186,9 +187,10 @@ require_once('../app/partials/landing_head.php');
                                                         <form method="post">
                                                             <!-- Hidden -->
                                                             <input type="hidden" name="bid_user_id" value="<?php echo $_SESSION['user_id']; ?>">
-                                                            <input type="hidden" name="bid_product_id" value="<?php echo $products['product_id']; ?>">
+                                                            <input type="hidden" name="product_price" value="<?php echo $products['product_price']; ?>">
                                                             <input type="hidden" name="bid_code" value="<?php echo $bid; ?>">
                                                             <input type="hidden" name="bid_date" value="<?php echo date('d M Y g:ia'); ?>">
+                                                            <input type="hidden" name="bid_product_id" value="<?php echo $products['product_id']; ?>">
                                                             <input type="hidden" name="bid_qty" value="1">
 
                                                             <div class="qty-plus-minus">
