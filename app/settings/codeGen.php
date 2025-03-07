@@ -109,3 +109,6 @@ $reset_password = '';
 
 /* Product SKU Code */
 $sku_code  = 'PRD-' . date('dmY') . '-' . substr(str_shuffle("QWERTYUIOPLKJHGFDSAZXCVBNM1234567890"), 1, 5);
+
+/* Bid Code */
+$bid = 'BID-' . date('dmY') . '-' . substr(str_shuffle("QWERTYUIOPLKJHGFDSAZXCVBNM1234567890"), 1, 5);

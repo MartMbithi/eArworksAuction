@@ -67,6 +67,7 @@
 
 session_start();
 require_once('../app/settings/config.php');
+require_once('../app/settings/codeGen.php');
 require_once('../app/settings/checklogin.php');
 require_once('../app/helpers/landing.php');
 require_once('../app/partials/landing_head.php');
@@ -182,10 +183,16 @@ require_once('../app/partials/landing_head.php');
 
                                                     <div class="ec-single-qty">
 
-                                                        <form method="post" action="landing_product?view=<?php echo $product_id; ?>&category=<?php echo $products['category_id']; ?>&action=add&product_id=<?php echo $product_array[$key]["product_id"]; ?>">
+                                                        <form method="post">
                                                             <!-- Hidden -->
+                                                            <input type="hidden" name="bid_user_id" value="<?php echo $_SESSION['user_id']; ?>">
+                                                            <input type="hidden" name="bid_product_id" value="<?php echo $products['product_id']; ?>">
+                                                            <input type="hidden" name="bid_code" value="<?php echo $bid; ?>">
+                                                            <input type="hidden" name="bid_date" value="<?php echo date('d M Y g:ia'); ?>">
+                                                            <input type="hidden" name="bid_qty" value="1">
+
                                                             <div class="qty-plus-minus">
-                                                                <input class="qty-input" type="text" name="quantity" value="1" />
+                                                                <input class="qty-input" required type="text" name="bid_cost" value="<?php echo $products['product_price']; ?>" />
                                                             </div>
                                                             <br>
                                                             <div class="ec-single-cart ">
