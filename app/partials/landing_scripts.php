@@ -121,3 +121,40 @@ if (isset($info)) { ?>
     </script>
 <?php }
 ?>
+<script>
+    function startCountdown() {
+        const countdownDuration = 4 * 60 * 60 * 1000; // 4 hours in milliseconds
+
+        let lastBidEndTime = localStorage.getItem("bidEndTime");
+
+        if (!lastBidEndTime || Date.now() > lastBidEndTime) {
+            lastBidEndTime = Date.now() + countdownDuration;
+            localStorage.setItem("bidEndTime", lastBidEndTime);
+        }
+
+        function updateTimer() {
+            let now = Date.now();
+            let remainingTime = lastBidEndTime - now;
+
+            if (remainingTime <= 0) {
+                lastBidEndTime = Date.now() + countdownDuration;
+                localStorage.setItem("bidEndTime", lastBidEndTime);
+                remainingTime = countdownDuration;
+            }
+
+            let hours = Math.floor(remainingTime / (1000 * 60 * 60));
+            let minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+            document.getElementById("bid-timer").innerHTML =
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            setTimeout(updateTimer, 1000);
+        }
+
+        updateTimer();
+    }
+
+    // Start the countdown when the page loads
+    startCountdown();
+</script>

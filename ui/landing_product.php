@@ -179,9 +179,6 @@ require_once('../app/partials/landing_head.php');
 
                                                         </div>
                                                     </div>
-                                                    <p class="text-success">
-                                                        Bid Closes In: <span id="bid-timer"></span>
-                                                    </p>
                                                     <p class="text-danger">
                                                         Bids can be placed every four hours, and your bid amount must not be lower than the artwork's selling price. Any bids below the product price will be discarded.
                                                     </p>
@@ -316,43 +313,7 @@ require_once('../app/partials/landing_head.php');
 
     <!-- Vendor JS -->
     <?php require_once('../app/partials/landing_scripts.php'); ?>
-    <script>
-        function startCountdown() {
-            const countdownDuration = 4 * 60 * 60 * 1000; // 4 hours in milliseconds
 
-            let lastBidEndTime = localStorage.getItem("bidEndTime");
-
-            if (!lastBidEndTime || Date.now() > lastBidEndTime) {
-                lastBidEndTime = Date.now() + countdownDuration;
-                localStorage.setItem("bidEndTime", lastBidEndTime);
-            }
-
-            function updateTimer() {
-                let now = Date.now();
-                let remainingTime = lastBidEndTime - now;
-
-                if (remainingTime <= 0) {
-                    lastBidEndTime = Date.now() + countdownDuration;
-                    localStorage.setItem("bidEndTime", lastBidEndTime);
-                    remainingTime = countdownDuration;
-                }
-
-                let hours = Math.floor(remainingTime / (1000 * 60 * 60));
-                let minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
-                let seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
-
-                document.getElementById("bid-timer").innerHTML =
-                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
-                setTimeout(updateTimer, 1000);
-            }
-
-            updateTimer();
-        }
-
-        // Start the countdown when the page loads
-        startCountdown();
-    </script>
 </body>
 
 </html>

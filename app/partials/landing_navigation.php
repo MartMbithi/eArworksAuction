@@ -106,7 +106,9 @@ if ($_SESSION['user_access_level'] == 'Customer') {
                     <!-- Header Top Message Start -->
                     <div class="col text-center header-top-center">
                         <div class="header-top-message text-upper">
-                            <span>Free Shipping</span>This Week Order Over - Ksh 7,500
+                            <strong>
+                                <span>The ongoing auction will end in</span><span id="bid-timer"></span>
+                            </strong>
                         </div>
                     </div>
                     <!-- Header Top Message End -->
