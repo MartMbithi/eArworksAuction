@@ -179,10 +179,13 @@ require_once('../app/partials/landing_head.php');
 
                                                         </div>
                                                     </div>
-
-
+                                                    <p class="text-success">
+                                                        Bid Closes In: <span id="bid-timer"></span>
+                                                    </p>
+                                                    <p class="text-danger">
+                                                        Bids can be placed every four hours, and your bid amount must not be lower than the artwork's selling price. Any bids below the product price will be discarded.
+                                                    </p>
                                                     <div class="ec-single-qty">
-
                                                         <form method="post">
                                                             <!-- Hidden -->
                                                             <input type="hidden" name="bid_user_id" value="<?php echo $_SESSION['user_id']; ?>">
@@ -192,22 +195,13 @@ require_once('../app/partials/landing_head.php');
                                                             <input type="hidden" name="bid_qty" value="1">
 
                                                             <div class="qty-plus-minus">
-                                                                <input class="qty-input" required type="text" name="bid_cost" value="<?php echo $products['product_price']; ?>" />
+                                                                <input class="qty-input" type="text" name="bid_cost" value="<?php echo $products['product_price']; ?>" />
                                                             </div>
                                                             <br>
                                                             <div class="ec-single-cart ">
                                                                 <button type="submit" name="Place_Bid" class="btn btn-primary">Place Bid</button>
                                                             </div>
                                                         </form>
-
-                                                        <div class="ec-single-wishlist">
-                                                            <form method="post">
-                                                                <!-- Hidden Values -->
-                                                                <input type="hidden" name="wishlist_product_id" value="<?php echo $products['product_id']; ?>">
-                                                                <input type="hidden" name="wishlist_user_id" value="<?php echo $_SESSION['user_id']; ?>">
-                                                                <button type="submit" name="Add_To_WishList" class="ec-btn-group wishlist"><img src="../public/landing_assets/images/icons/wishlist.svg" class="svg_img pro_svg" alt="" /></button>
-                                                            </form>
-                                                        </div>
                                                     </div>
                                                 <?php } ?>
                                             </div>
@@ -322,6 +316,43 @@ require_once('../app/partials/landing_head.php');
 
     <!-- Vendor JS -->
     <?php require_once('../app/partials/landing_scripts.php'); ?>
+    <script>
+        function startCountdown() {
+            const countdownDuration = 4 * 60 * 60 * 1000; // 4 hours in milliseconds
+
+            let lastBidEndTime = localStorage.getItem("bidEndTime");
+
+            if (!lastBidEndTime || Date.now() > lastBidEndTime) {
+                lastBidEndTime = Date.now() + countdownDuration;
+                localStorage.setItem("bidEndTime", lastBidEndTime);
+            }
+
+            function updateTimer() {
+                let now = Date.now();
+                let remainingTime = lastBidEndTime - now;
+
+                if (remainingTime <= 0) {
+                    lastBidEndTime = Date.now() + countdownDuration;
+                    localStorage.setItem("bidEndTime", lastBidEndTime);
+                    remainingTime = countdownDuration;
+                }
+
+                let hours = Math.floor(remainingTime / (1000 * 60 * 60));
+                let minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+                document.getElementById("bid-timer").innerHTML =
+                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+                setTimeout(updateTimer, 1000);
+            }
+
+            updateTimer();
+        }
+
+        // Start the countdown when the page loads
+        startCountdown();
+    </script>
 </body>
 
 </html>
