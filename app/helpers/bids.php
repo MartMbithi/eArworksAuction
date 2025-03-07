@@ -81,7 +81,21 @@ if (isset($_POST['Place_Bid'])) {
         $err = "Your Bid Is Lower Than The Artwork Price";
     } else {
         /* Prevent Bidding Multiple Times On Artwork Before 4 hours Elapses */
-        $sql = "SELECT * FROM bids WHERE bid_user_id = '$bid_user_id' AND bid_product_id = '$bid_product_id' AND bid_date >= DATE_SUB(NOW(), INTERVAL 4 HOUR)";
+        $sql = "SELECT * FROM bids WHERE bid_user_id  = '{$bid_user_id}' AND bid_product_id = '{$bid_product_id}' AND bid_date >= DATE_SUB(NOW(), INTERVAL 4 HOUR)";
+        $result = mysqli_query($mysqli, $sql);
+        if (mysqli_num_rows($result) > 0) {
+            $err = "You Can Only Bid Once Every 4 Hours";
+        } else {
+            if (mysqli_query(
+                $mysqli,
+                "INSERT INTO bids (bid_user_id, bid_code, bid_date, bid_product_id, bid_qty, bid_cost)
+                VALUES ('{$bid_user_id}', '{$bid_code}', '{$bid_date}', '{$bid_product_id}', '{$bid_qty}', '{$bid_cost}')"
+            )) {
+                $success = "Bid Placed Successfully";
+            } else {
+                $err = "Failed To Place Bid";
+            }
+        }
     }
 }
 /* Cancel Bid */
