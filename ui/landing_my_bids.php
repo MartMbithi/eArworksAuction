@@ -169,7 +169,9 @@ require_once('../app/partials/landing_head.php');
                                                     <td><span><?php echo $orders['bid_status']; ?></span></td>
                                                     <td>
                                                         <span class="tbl-btn">
-                                                            <a class="btn btn-lg btn-primary" href="landing_product?view=<?php echo $orders['product_id']; ?>&category=<?php echo $orders['product_category_id']; ?>">View</a>
+                                                            <?php if ($orders['bid_status'] == 'Approved') { ?>
+                                                                <a class="btn btn-lg btn-primary" href="landing_track_order_details?view=<?php echo $orders['bid_id']; ?>">View Order</a>
+                                                            <?php } ?>
                                                             <a class="btn btn-lg btn-danger" href="landing_my_bids?cancel_bid=<?php echo $orders['bid_id']; ?>">Cancel Bid</a>
                                                         </span>
                                                     </td>
