@@ -457,7 +457,7 @@ require_once('../app/partials/landing_head.php');
                                                         <td data-label="Price" class="ec-cart-pro-price"><span class="amount"></span></td>
                                                         <td data-label="Price" class="ec-cart-pro-price text-center"><span class="amount"></span></td>
                                                         <td data-label="Total" class="ec-cart-pro-subtotal">
-                                                            <span class="tbl-btn"><button class="btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#checkout_modal_<?php echo $item_order['order_id']; ?>">Add Payment</button></span>
+                                                            <span class="tbl-btn"><button class="btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#checkout_modal_<?php echo $order_code; ?>">Add Payment</button></span>
                                                         </td>
                                                     </tr>
                                                 <?php }
