@@ -152,3 +152,19 @@ if (isset($_POST['Approve_Bid'])) {
         }
     }
 }
+
+
+/* Decline Bid */
+if (isset($_POST['Decline_Bid'])) {
+    $bid_id = mysqli_real_escape_string($mysqli, $_POST['bid_id']);
+    $bid_status = mysqli_real_escape_string($mysqli, 'Declined');
+
+    if (mysqli_query(
+        $mysqli,
+        "UPDATE bids SET bid_status = '{$bid_status}' WHERE bid_id = '{$bid_id}'"
+    )) {
+        $success = "Bid Declined Successfully";
+    } else {
+        $err = "Failed To Decline Bid";
+    }
+}
