@@ -112,9 +112,11 @@ require_once('../app/partials/backoffice_head.php');
                                             <thead>
                                                 <tr>
                                                     <th>Bid Code</th>
-                                                    <th>Customer Details</th>
-                                                    <th>Items</th>
+                                                    <th>Customer</th>
+                                                    <th>Item</th>
+                                                    <th>Cost</th>
                                                     <th>Status</th>
+                                                    <th>Date</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -143,15 +145,14 @@ require_once('../app/partials/backoffice_head.php');
                                                 ?>
                                                         <tr>
                                                             <td>
-                                                                <a href="backoffice_manage_order?view=<?php echo $bids['order_code']; ?>">
-                                                                    <?php echo $bids['bid_code']; ?>
-                                                                </a>
+                                                                <?php echo $bids['bid_code']; ?>
                                                             </td>
                                                             <td>
                                                                 Name: <?php echo $bids['user_first_name'] . ' ' . $bids['user_last_name']; ?><br>
                                                                 Phone: <?php echo $bids['user_phone_number']; ?>
                                                             </td>
-                                                            <td><?php echo $items_in_my_order; ?> Items</td>
+                                                            <td><?php echo $bids['product_name']; ?></td>
+                                                            <td>Ksh <?php echo $bids['bid_cost']; ?></td>
                                                             <td>
                                                                 <?php
                                                                 if ($bids['bid_status'] == 'Pending') {
@@ -163,17 +164,16 @@ require_once('../app/partials/backoffice_head.php');
                                                                 }
                                                                 ?>
                                                             </td>
+                                                            <td>Ksh <?php echo $bids['bid_date']; ?></td>
                                                             <td>
                                                                 <div class="btn-group mb-1">
                                                                     <button type="button" class="btn btn-outline-success">Manage</button>
                                                                     <button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                                                                         <span class="sr-only">Manage</span>
                                                                     </button>
-
                                                                     <div class="dropdown-menu">
-                                                                        <a class="dropdown-item" data-bs-toggle="modal" href="#approve_<?php echo $bids['bid_id']; ?>">Accept Bid</a>
+                                                                        <a class="dropdown-item" data-bs-toggle="modal" href="#reject_<?php echo $bids['bid_id']; ?>">Accept Bid</a>
                                                                         <a class="dropdown-item" data-bs-toggle="modal" href="#reject_<?php echo $bids['bid_id']; ?>">Reject Bid</a>
-                                                                        <a class="dropdown-item" data-bs-toggle="modal" href="#delete_bid<?php echo $bids['bid_id']; ?>">Cancel Bid</a>
                                                                     </div>
                                                                 </div>
                                                             </td>
