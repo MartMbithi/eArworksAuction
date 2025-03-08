@@ -115,4 +115,40 @@ if (isset($_GET['cancel_bid'])) {
     }
 }
 
-/* Process Bid */
+/* Process Bid - Approve It */
+if (isset($_POST['Approve_Bid'])) {
+    $order_user_id  = mysqli_real_escape_string($mysqli, $_POST['order_user_id']);
+    $order_bid_id  = mysqli_real_escape_string($mysqli, $_POST['order_bid_id']);
+    $order_product_id  = mysqli_real_escape_string($mysqli, $_POST['order_product_id']);
+    $order_code = mysqli_real_escape_string($mysqli, $order);
+    $order_date = mysqli_real_escape_string($mysqli, date('Y-m-d H:i:s'));
+    $order_cost = mysqli_real_escape_string($mysqli, $_POST['order_cost']);
+    $order_status = mysqli_real_escape_string($mysqli, 'Pending');
+    $order_payment_status = mysqli_real_escape_string($mysqli, 'Pending');
+
+    $product_sql = mysqli_query(
+        $mysqli,
+        "SELECT * FROM products WHERE product_delete_status = '0' AND product_id = '{$order_product_id}'"
+    );
+    if (mysqli_num_rows($product_sql) > 0) {
+        while ($product = mysqli_fetch_array($product_sql)) {
+            /* Get Product Price Based On Product ID Posted From The Form */
+            $order_cost = mysqli_real_escape_string($mysqli, ($product['product_price'] * $order_qty));
+            /* Deduct Products From Stock */
+            $new_product_qty = $product['product_qty_in_stock'] - $order_qty;
+
+            /* Update Product Stock */
+            $update_sql = "UPDATE products SET product_qty_in_stock ='{$new_product_qty}' WHERE product_id = '{$order_product_id}'";
+
+            /* Persist */
+            $sql = "INSERT INTO orders (order_user_id, order_product_id, order_code, order_date, order_cost, order_status, order_qty,  order_payment_status, order_estimated_delivery_date) VALUES(
+            '{$order_user_id}', '{$order_product_id}', '{$order_code}', '{$order_date}', '{$order_cost}', '{$order_status}', '{$order_qty}', '{$order_payment_status}', '{$order_estimated_delivery_date}')";
+
+            if (mysqli_query($mysqli, $sql) && mysqli_query($mysqli, $update_sql)) {
+                $success = "Bid Processed And Order $order_code Added";
+            } else {
+                $err = "Failed, try again";
+            }
+        }
+    }
+}

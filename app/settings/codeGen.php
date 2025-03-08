@@ -112,3 +112,6 @@ $sku_code  = 'PRD-' . date('dmY') . '-' . substr(str_shuffle("QWERTYUIOPLKJHGFDS
 
 /* Bid Code */
 $bid = 'BID-' . date('dmY') . '-' . substr(str_shuffle("QWERTYUIOPLKJHGFDSAZXCVBNM1234567890"), 1, 5);
+
+/* Order Code */
+$order = 'ORD-' . date('dmY') . '-' . substr(str_shuffle("QWERTYUIOPLKJHGFDSAZXCVBNM1234567890"), 1, 5);
