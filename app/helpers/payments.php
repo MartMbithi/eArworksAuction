@@ -120,7 +120,7 @@ if (isset($_POST['Add_Payment'])) {
             ]),
             CURLOPT_HTTPHEADER => [
                 'Content-Type: application/json',
-                'Authorization: Bearer FLWSECK_TEST-d6261bd386fefc2e6866ee0f859783f1-X'
+                'Authorization: Bearer ' . $flutterwave_keys
             ],
         ]);
 
