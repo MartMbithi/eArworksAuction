@@ -78,7 +78,7 @@ if (isset($_POST['Add_Payment'])) {
     $user_contacts = mysqli_real_escape_string($mysqli, $_POST['user_contacts']);
     $user_name = mysqli_real_escape_string($mysqli, $_POST['user_name']);
     /* Handle Cash On Delivery Payment Method */
-    if ($payment_method_name == 'Cash') {
+    if ($payment_method_name == 'Cash On Delivery') {
 
         /* Persist */
         $sql = "INSERT INTO payments (payment_order_code, payment_means_id, payment_amount, payment_ref_code) 
@@ -91,10 +91,7 @@ if (isset($_POST['Add_Payment'])) {
         } else {
             $err = "Failed, please try again";
         }
-    } else if ($payment_method_name == 'Cryptocurrency') {
-        /* Handle Crypto Currency Payment */
-        header("Location: crypto_handler/index?order=$payment_order_code&amount=$payment_amount");
-    } else if ($payment_method_name == 'Debit / Credit Card' || $payment_method_name == 'Mobile Money') {
+    } else if ($payment_method_name == 'Debit / Credit Card' || $payment_method_name == 'Mobile Payment') {
         /* Process Flutterwave Payment API */
         $request = [
             'tx_ref' => time(), /* Just Timestamp Every Transaction */
@@ -144,7 +141,9 @@ if (isset($_POST['Add_Payment'])) {
             $link = $res->data->link;
             header('Location: ' . $link);
         } else {
-            $err =  'We can not process your payment';
+            //$err =  'We can not process your payment';
+            /* Show Me Exact Error Message */
+            $err = $res->message;
         }
     } else {
         $err = "Payment means is not supported yet";
