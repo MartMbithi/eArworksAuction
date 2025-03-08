@@ -92,31 +92,10 @@ if (isset($_POST['Add_Payment'])) {
             $err = "Failed, please try again";
         }
     } else if ($payment_method_name == 'Debit / Credit Card' || $payment_method_name == 'Mobile Payment') {
-        /* Process Flutterwave Payment API */
-        $request = [
-            'tx_ref' => time(), /* Just Timestamp Every Transaction */
-            'amount' => $payment_amount,
-            'currency' => 'KES',
-            'payment_options' => 'card',
-            /* Update This URL To Match Your Needs */
-            'redirect_url' => 'http://127.0.0.1/eArworksAuction/ui/payment_response?order=' . $payment_order_code . '&means=' . $payment_means_id,
-            'customer' => [
-                'email' => $user_email,
-                'name' => $user_name,
-            ],
-            'meta' => [
-                'price' => $payment_amount
-            ],
-            'customizations' => [
-                'title' => 'Order ' . ' ' . $payment_order_code . ' Payment',
-                'description' => $user_name . 'Order Payment'
-            ]
-        ];
-
-        /* Call Flutterwave Endpoint */
+        /* Flutterwave To Handle Both Mobile & Card Payments */
         $curl = curl_init();
 
-        curl_setopt_array($curl, array(
+        curl_setopt_array($curl, [
             CURLOPT_URL => 'https://api.flutterwave.com/v3/payments',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
@@ -125,26 +104,30 @@ if (isset($_POST['Add_Payment'])) {
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => json_encode($request),
-            CURLOPT_HTTPHEADER => array(
-                'Authorization: Bearer ' . $flutterwave_keys, /* To Do : Never hard code this bearer */
-                'Content-Type: application/json'
-            ),
-        ));
+            CURLOPT_POSTFIELDS => json_encode([
+                "tx_ref" => "MC-" . time(),
+                "amount" => (int) $payment_amount, // Ensure numeric
+                "currency" => "KES",
+                "redirect_url" => "http://127.0.0.1/eArtworksAuction/ui/payment_response?order=" . $payment_order_code . "&means=" . $payment_means_id,
+                "customer" => [
+                    "email" => $user_email,
+                    "name" => $user_name
+                ],
+                "customizations" => [
+                    "title" => "Order " . $payment_order_code . " Payment",
+                    "description" => $user_name . " Order Payment"
+                ]
+            ]),
+            CURLOPT_HTTPHEADER => [
+                'Content-Type: application/json',
+                'Authorization: Bearer FLWSECK_TEST-d6261bd386fefc2e6866ee0f859783f1-X'
+            ],
+        ]);
 
         $response = curl_exec($curl);
-
         curl_close($curl);
 
-        $res = json_decode($response);
-        if ($res->status == 'success') {
-            $link = $res->data->link;
-            header('Location: ' . $link);
-        } else {
-            //$err =  'We can not process your payment';
-            /* Show Me Exact Error Message */
-            $err = $res->message;
-        }
+        echo $response;
     } else {
         $err = "Payment means is not supported yet";
     }

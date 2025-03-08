@@ -112,6 +112,7 @@ if (isset($_GET['status'])) {
                 $order_payment_status = mysqli_real_escape_string($mysqli, 'Paid');
                 $means_id = mysqli_real_escape_string($mysqli, $_GET['means']);
                 $order_code = mysqli_real_escape_string($mysqli, $_GET['order']);
+                $bid_id = mysqli_real_escape_string($mysqli, $_GET['bid']);
 
                 $sql = "INSERT INTO payments (payment_order_code, payment_means_id, payment_amount, payment_ref_code) 
                 VALUES('{$order_code}', '{$means_id}', '{$payment_amount}', '$payment_ref_code')";
@@ -120,21 +121,21 @@ if (isset($_GET['status'])) {
 
                 if (mysqli_query($mysqli, $sql) && mysqli_query($mysqli, $order_status)) {
                     $_SESSION['success'] = 'Payment Ref ' . $payment_ref_code . ' Posted';
-                    header('Location: landing_track_order_details?view=' . $order_code);
+                    header('Location: landing_track_order_details?view=' . $bid_id);
                     exit;
                 } else {
                     $_SESSION['err'] = 'Failed to persist transaction details';
-                    header('Location: landing_track_order_details?view=' . $order_code);
+                    header('Location: landing_track_order_details?view=' . $bid_id);
                     exit;
                 }
             } else {
                 $_SESSION['err'] = 'We are having problem processing your payment';
-                header('Location: landing_track_order_details?view=' . $order_code);
+                header('Location: landing_track_order_details?view=' . $bid_id);
                 exit;
             }
         } else {
             $_SESSION['err'] = 'Can not process payment, please use MPESA payment method';
-            header('Location: landing_track_order_details?view=' . $order_code);
+            header('Location: landing_track_order_details?view=' . $bid_id);
             exit;
         }
     }
