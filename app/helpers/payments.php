@@ -69,6 +69,7 @@
 if (isset($_POST['Add_Payment'])) {
     /* Add Extra Payment Methods Handlers Here */
     $payment_method_name = mysqli_real_escape_string($mysqli, $_POST['payment_method_name']);
+    $bid_id = mysqli_real_escape_string($mysqli, $_POST['bid_id']);
     $payment_order_code = mysqli_real_escape_string($mysqli, $_POST['payment_order_code']);
     $payment_means_id = mysqli_real_escape_string($mysqli, $_POST['payment_means_id']);
     $payment_amount = mysqli_real_escape_string($mysqli, $_POST['payment_amount']);
@@ -99,7 +100,7 @@ if (isset($_POST['Add_Payment'])) {
             'currency' => 'KES',
             'payment_options' => 'card',
             /* Update This URL To Match Your Needs */
-            'redirect_url' => 'http://localhost/eArworksAuction/ui/payment_response?order=' . $payment_order_code . '&means=' . $payment_means_id,
+            'redirect_url' => 'http://localhost/eArworksAuction/ui/payment_response?order=' . $payment_order_code . '&means=' . $payment_means_id.'&bid=' . $bid_id,
             'customer' => [
                 'email' => $user_email,
                 'name' => $user_name,

@@ -368,7 +368,7 @@ require_once('../app/partials/landing_head.php');
                                                 <th scope="col">Item SKU</th>
                                                 <th scope="col">Item Name</th>
                                                 <th scope="col">Item QTY</th>
-                                                <th scope="col">Item Cost</th>
+                                                <th scope="col">Item Bid Cost</th>
                                                 <th scope="col">Total Cost</th>
                                             </tr>
                                         </thead>
@@ -415,7 +415,7 @@ require_once('../app/partials/landing_head.php');
                                                         <td><span><?php echo $item_order['product_sku_code']; ?></span></td>
                                                         <td><span><?php echo $item_order['product_name']; ?></span></td>
                                                         <td><span><?php echo $item_order['order_qty']; ?></span></td>
-                                                        <td><span>Ksh <?php echo number_format($item_order['product_price'], 2); ?></span></td>
+                                                        <td><span>Ksh <?php echo number_format($item_order['order_cost'], 2); ?></span></td>
                                                         <td><span>Ksh <?php echo number_format($item_order['order_cost'], 2); ?></span></td>
                                                     </tr>
 

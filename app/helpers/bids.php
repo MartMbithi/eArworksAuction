@@ -134,8 +134,6 @@ if (isset($_POST['Approve_Bid'])) {
     );
     if (mysqli_num_rows($product_sql) > 0) {
         while ($product = mysqli_fetch_array($product_sql)) {
-            /* Get Product Price Based On Product ID Posted From The Form */
-            $order_cost = mysqli_real_escape_string($mysqli, ($product['product_price'] * $order_qty));
             /* Deduct Products From Stock */
             $new_product_qty = $product['product_qty_in_stock'] - $order_qty;
 

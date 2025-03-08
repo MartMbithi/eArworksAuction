@@ -13,6 +13,7 @@
                             <div class="form-group">
                                 <label for="firstName">Pay your order with:</label>
                                 <input type="hidden" name="payment_order_code" value="<?php echo $order_code; ?>">
+                                <input type="hidden" name="bid_id" value="<?php echo $_GET['view']; ?>">
                                 <input type="hidden" name="payment_amount" value="<?php echo ($total_price + $constant_delivery_fee); ?>">
                                 <input type="hidden" name="payment_ref_code" value="<?php echo $paycode; ?>">
                                 <input type="hidden" name="user_email" value="<?php echo $_SESSION['user_email']; ?>">
