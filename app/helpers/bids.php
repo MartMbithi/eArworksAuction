@@ -123,7 +123,7 @@ if (isset($_POST['Approve_Bid'])) {
     $order_code = mysqli_real_escape_string($mysqli, $order);
     $order_date = mysqli_real_escape_string($mysqli, date('Y-m-d H:i:s'));
     $order_cost = mysqli_real_escape_string($mysqli, $_POST['order_cost']);
-    $order_status = mysqli_real_escape_string($mysqli, 'Pending');
+    $order_status = mysqli_real_escape_string($mysqli, 'Placed Orders');
     $order_payment_status = mysqli_real_escape_string($mysqli, 'Pending');
 
     $product_sql = mysqli_query(

@@ -1,6 +1,6 @@
 <?php
 /*
- *   Crafted On Sat Mar 01 2025
+ *   Crafted On Sat Mar 08 2025
  *   From his finger tips, through his IDE to your deployment environment at full throttle with no bugs, loss of data,
  *   fluctuations, signal interference, or doubt—it can only be
  *   the legendary coding wizard, Martin Mbithi (martin@devlan.co.ke, www.martmbithi.github.io)
@@ -81,7 +81,7 @@ require_once('../app/partials/landing_head.php');
 
     <!-- Header start  -->
     <?php require_once('../app/partials/landing_navigation.php');
-    $order_code = mysqli_real_escape_string($mysqli, $_GET['view']);
+    $view = mysqli_real_escape_string($mysqli, $_GET['view']);
     /* Pull Recent Purchases Made By This User */
     $order_user_id = mysqli_real_escape_string($mysqli, $_SESSION['user_id']);
     $orders_sql = mysqli_query(
@@ -94,8 +94,7 @@ require_once('../app/partials/landing_head.php');
         AND c.category_delete_status = '0'
         AND p.product_delete_status = '0'
         AND o.order_delete_status = '0'
-        AND o.order_code = '{$order_code}'
-        GROUP BY o.order_code"
+        AND o.order_bid_id  = '{$view}'"
     );
     if (mysqli_num_rows($orders_sql) > 0) {
         while ($orders = mysqli_fetch_array($orders_sql)) {
@@ -390,7 +389,7 @@ require_once('../app/partials/landing_head.php');
                                                 AND p.product_delete_status = '0'
                                                 AND o.order_delete_status = '0'
                                                 AND u.user_id = '{$order_user_id}'
-                                                AND o.order_code = '{$order_code}'
+                                                AND o.order_bid_id = '{$view}'
                                                 "
                                             );
                                             if (mysqli_num_rows($orders_sql) > 0) {
@@ -407,7 +406,7 @@ require_once('../app/partials/landing_head.php');
                                                     $total_price += $orders['order_cost'];
                                                     /* DeliverY Fee */
 
-                                                    $constant_delivery_fee = '1500';
+                                                    $constant_delivery_fee = '500';
                                                     $payment_status = $orders['order_payment_status'];
                                                     $user_name = $orders['user_first_name'] . ' ' . $orders['user_last_name'];
                                                     $user_contacts = $orders['user_phone_number'];

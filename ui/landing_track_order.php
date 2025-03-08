@@ -157,8 +157,6 @@ require_once('../app/partials/landing_head.php');
                                                 $stmt->bind_result($items_in_my_order);
                                                 $stmt->fetch();
                                                 $stmt->close();
-                                               
-
                                         ?>
                                                 <tr>
                                                     <th scope="row"><span><?php echo $orders['order_code']; ?></span></th>
@@ -167,7 +165,7 @@ require_once('../app/partials/landing_head.php');
                                                     <td><span><?php echo date('d M Y', strtotime($orders['order_estimated_delivery_date'])); ?></span></td>
                                                     <td>
                                                         <span class="tbl-btn">
-                                                            <a class="btn btn-lg btn-primary" href="landing_track_order_details?view=<?php echo $orders['order_code']; ?>">Track Order</a>
+                                                            <a class="btn btn-lg btn-primary" href="landing_track_order_details?view=<?php echo $orders['order_bid_id']; ?>">Track Order</a>
                                                         </span>
                                                     </td>
                                                 </tr>
