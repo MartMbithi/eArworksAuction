@@ -100,5 +100,19 @@ if (isset($_POST['Place_Bid'])) {
 }
 
 /* Cancel Bid */
+if (isset($_GET['cancel_bid'])) {
+    $bid_id = mysqli_real_escape_string($mysqli, $_GET['cancel_bid']);
+
+    if (mysqli_query(
+        $mysqli,
+        "DELETE FROM bids WHERE bid_id = '{$bid_id}'"
+    )) {
+        $_SESSION['success'] = "Bid Cancelled Successfully";
+        header('Location: landing_my_bids');
+        exit;
+    } else {
+        $err = "Failed To Cancel Bid, Please Try Again";
+    }
+}
 
 /* Process Bid */
