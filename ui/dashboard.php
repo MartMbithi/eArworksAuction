@@ -147,6 +147,17 @@ require_once('../app/partials/backoffice_head.php');
                     <div class="row">
                         <div class="col-xl-3 col-sm-6 p-b-15 lbl-card">
                             <div class="card card-mini dash-card card-1">
+                                <a href="backoffice_manage_bids" class="text-dark">
+                                    <div class="card-body">
+                                        <h2 class="mb-1"><?php echo $placed_bids; ?></h2>
+                                        <p>Placed Bids</p>
+                                        <span class="mdi mdi-gavel"></span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-sm-6 p-b-15 lbl-card">
+                            <div class="card card-mini dash-card card-1">
                                 <a href="backoffice_manage_orders" class="text-dark">
                                     <div class="card-body">
                                         <h2 class="mb-1"><?php echo $placed_orders; ?></h2>
@@ -178,7 +189,9 @@ require_once('../app/partials/backoffice_head.php');
                                 </a>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-sm-6 p-b-15 lbl-card">
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-4 col-sm-6 p-b-15 lbl-card">
                             <div class="card card-mini dash-card card-4">
                                 <a href="backoffice_manage_orders" class="text-dark">
                                     <div class="card-body">
@@ -189,9 +202,7 @@ require_once('../app/partials/backoffice_head.php');
                                 </a>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xl-6 col-sm-6 p-b-15 lbl-card">
+                        <div class="col-xl-4 col-sm-6 p-b-15 lbl-card">
                             <div class="card card-mini dash-card card-1">
                                 <a href="backoffice_manage_orders" class="text-dark">
                                     <div class="card-body">
@@ -202,7 +213,7 @@ require_once('../app/partials/backoffice_head.php');
                                 </a>
                             </div>
                         </div>
-                        <div class="col-xl-6 col-sm-6 p-b-15 lbl-card">
+                        <div class="col-xl-4 col-sm-6 p-b-15 lbl-card">
                             <div class="card card-mini dash-card card-2">
                                 <a href="backoffice_manage_orders" class="text-dark">
                                     <div class="card-body">

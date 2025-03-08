@@ -100,6 +100,15 @@ $stmt->bind_result($payments);
 $stmt->fetch();
 $stmt->close();
 
+/* Bids */
+$query = "SELECT COUNT(*)  FROM bids WHERE bid_status = 'Pending'";
+$stmt = $mysqli->prepare($query);
+$stmt->execute();
+$stmt->bind_result($placed_bids);
+$stmt->fetch();
+$stmt->close();
+
+
 /* Placed Orders */
 $query = "SELECT COUNT(*)  FROM orders WHERE order_status = 'Placed Orders' AND  order_delete_status = '0'";
 $stmt = $mysqli->prepare($query);
