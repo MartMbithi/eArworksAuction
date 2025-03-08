@@ -330,6 +330,8 @@ if ($_SESSION['user_access_level'] == 'Customer') {
                                 </li>
                                 <li><a href="landing_products">Artworks</a></li>
                                 <li><a href="landing_my_bids">My Bids</a></li>
+                                <li><a href="landing_reccomendations">Reccomendations</a></li>
+                                <li><a href="landing_seller_dashboard">Seller Dashboard</a></li>
                             </ul>
                         </div>
                     </div>

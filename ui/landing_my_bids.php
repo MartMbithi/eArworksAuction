@@ -163,7 +163,7 @@ require_once('../app/partials/landing_head.php');
                                                     <th scope="row"><span><?php echo $orders['bid_code']; ?></span></th>
                                                     <td><img class="prod-img" src="<?php echo $product_image_dir; ?>" alt="product image"></td>
                                                     <td><span><?php echo $orders['product_name']; ?></span></td>
-                                                    <td><span><?php echo date('d M Y', strtotime($orders['order_date'])); ?></span></td>
+                                                    <td><span><?php echo date('d M Y', strtotime($orders['bid_date'])); ?></span></td>
                                                     <td><span><?php echo $orders['bid_qty']; ?></span></td>
                                                     <td><span>Ksh <?php echo number_format($orders['bid_cost'], 2); ?></span></td>
                                                     <td><span><?php echo $orders['bid_status']; ?></span></td>
