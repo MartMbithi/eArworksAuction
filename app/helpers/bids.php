@@ -125,6 +125,8 @@ if (isset($_POST['Approve_Bid'])) {
     $order_cost = mysqli_real_escape_string($mysqli, $_POST['order_cost']);
     $order_status = mysqli_real_escape_string($mysqli, 'Placed Orders');
     $order_payment_status = mysqli_real_escape_string($mysqli, 'Pending');
+    $order_qty = mysqli_real_escape_string($mysqli, 1);
+    $order_estimated_delivery_date = mysqli_real_escape_string($mysqli, date($order_date, strtotime('+7 days')));
 
     $product_sql = mysqli_query(
         $mysqli,
@@ -141,9 +143,8 @@ if (isset($_POST['Approve_Bid'])) {
             $update_sql = "UPDATE products SET product_qty_in_stock ='{$new_product_qty}' WHERE product_id = '{$order_product_id}'";
 
             /* Persist */
-            $sql = "INSERT INTO orders (order_user_id, order_product_id, order_code, order_date, order_cost, order_status, order_qty,  order_payment_status, order_estimated_delivery_date) VALUES(
-            '{$order_user_id}', '{$order_product_id}', '{$order_code}', '{$order_date}', '{$order_cost}', '{$order_status}', '{$order_qty}', '{$order_payment_status}', '{$order_estimated_delivery_date}')";
-
+            $sql = "INSERT INTO orders (order_bid_id, order_user_id, order_product_id, order_code, order_date, order_cost, order_status, order_qty,  order_payment_status, order_estimated_delivery_date) VALUES(
+            '{$order_bid_id}', '{$order_user_id}', '{$order_product_id}', '{$order_code}', '{$order_date}', '{$order_cost}', '{$order_status}', '{$order_qty}', '{$order_payment_status}', '{$order_estimated_delivery_date}')";
             if (mysqli_query($mysqli, $sql) && mysqli_query($mysqli, $update_sql)) {
                 $success = "Bid Processed And Order $order_code Added";
             } else {

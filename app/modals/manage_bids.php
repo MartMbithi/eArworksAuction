@@ -13,9 +13,12 @@
                     </h4>
                     <br>
                     <!-- Hide This -->
-                    <input type="hidden" name="order_code" value="<?php echo $orders['order_code']; ?>">
+                    <input type="hidden" name="order_user_id" value="<?php echo $bids['bid_user_id']; ?>">
+                    <input type="hidden" name="order_bid_id" value="<?php echo $bids['bid_id']; ?>">
+                    <input type="hidden" name="order_product_id" value="<?php echo $bids['bid_product_id']; ?>">
+                    <input type="hidden" name="order_cost" value="<?php echo $bids['bid_cost']; ?>">
                     <button type="button" class="text-center btn btn-success" data-bs-dismiss="modal">No</button>
-                    <button type="submit" class="text-center btn btn-danger" name="D">Yes, Accept</button>
+                    <button type="submit" class="text-center btn btn-danger" name="Approve_Bid">Yes, Accept</button>
                 </div>
             </form>
         </div>
