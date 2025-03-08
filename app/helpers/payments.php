@@ -99,7 +99,7 @@ if (isset($_POST['Add_Payment'])) {
             'currency' => 'KES',
             'payment_options' => 'card',
             /* Update This URL To Match Your Needs */
-            'redirect_url' => 'http://locahost/eArworksAuction/ui/payment_response?order=' . $payment_order_code . '&means=' . $payment_means_id,
+            'redirect_url' => 'http://localhost/eArworksAuction/ui/payment_response?order=' . $payment_order_code . '&means=' . $payment_means_id,
             'customer' => [
                 'email' => $user_email,
                 'name' => $user_name,
