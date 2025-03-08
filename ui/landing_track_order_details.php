@@ -97,6 +97,7 @@ require_once('../app/partials/landing_head.php');
     );
     if (mysqli_num_rows($orders_sql) > 0) {
         while ($orders = mysqli_fetch_array($orders_sql)) {
+            $order_code = $orders['order_code'];
     ?>
             <!-- Header End  -->
 
@@ -377,7 +378,7 @@ require_once('../app/partials/landing_head.php');
                                             $total_price = 0;
                                             /* Pull Recent Purchases Made By This User */
                                             $order_user_id = mysqli_real_escape_string($mysqli, $_SESSION['user_id']);
-                                            $orders_sql = mysqli_query(
+                                            $items_orders_sql = mysqli_query(
                                                 $mysqli,
                                                 "SELECT * FROM orders o  
                                                 INNER JOIN products p ON p.product_id = o.order_product_id
@@ -391,24 +392,18 @@ require_once('../app/partials/landing_head.php');
                                                 AND o.order_bid_id = '{$view}'
                                                 "
                                             );
-                                            if (mysqli_num_rows($orders_sql) > 0) {
-                                                while ($orders = mysqli_fetch_array($orders_sql)) {
-                                                    /* Sum Number Of Items In The Order */
-                                                    $query = "SELECT COUNT(*)  FROM orders WHERE order_code = '{$orders['order_code']}'";
-                                                    $stmt = $mysqli->prepare($query);
-                                                    $stmt->execute();
-                                                    $stmt->bind_result($items_in_my_order);
-                                                    $stmt->fetch();
-                                                    $stmt->close();
+                                            if (mysqli_num_rows($items_orders_sql) > 0) {
+                                                while ($item_order = mysqli_fetch_array($items_orders_sql)) {
+
                                                     /* Compute Quantity And Amount Supposed To Be Paid */
-                                                    $total_quantity += $orders["order_qty"];
-                                                    $total_price += $orders['order_cost'];
+                                                    $total_quantity += $item_order["order_qty"];
+                                                    $total_price += $item_order['order_cost'];
                                                     /* DeliverY Fee */
 
                                                     $constant_delivery_fee = '500';
-                                                    $payment_status = $orders['order_payment_status'];
-                                                    $user_name = $orders['user_first_name'] . ' ' . $orders['user_last_name'];
-                                                    $user_contacts = $orders['user_phone_number'];
+                                                    $payment_status = $item_order['order_payment_status'];
+                                                    $user_name = $item_order['user_first_name'] . ' ' . $item_order['user_last_name'];
+                                                    $user_contacts = $item_order['user_phone_number'];
 
 
                                                     /* Push Variables To Global Variable */
@@ -417,11 +412,11 @@ require_once('../app/partials/landing_head.php');
 
                                             ?>
                                                     <tr>
-                                                        <td><span><?php echo $orders['product_sku_code']; ?></span></td>
-                                                        <td><span><?php echo $orders['product_name']; ?></span></td>
-                                                        <td><span><?php echo $orders['order_qty']; ?></span></td>
-                                                        <td><span>Ksh <?php echo number_format($orders['product_price'], 2); ?></span></td>
-                                                        <td><span>Ksh <?php echo number_format($orders['order_cost'], 2); ?></span></td>
+                                                        <td><span><?php echo $item_order['product_sku_code']; ?></span></td>
+                                                        <td><span><?php echo $item_order['product_name']; ?></span></td>
+                                                        <td><span><?php echo $item_order['order_qty']; ?></span></td>
+                                                        <td><span>Ksh <?php echo number_format($item_order['product_price'], 2); ?></span></td>
+                                                        <td><span>Ksh <?php echo number_format($item_order['order_cost'], 2); ?></span></td>
                                                     </tr>
 
                                                 <?php  } ?>
@@ -462,7 +457,7 @@ require_once('../app/partials/landing_head.php');
                                                         <td data-label="Price" class="ec-cart-pro-price"><span class="amount"></span></td>
                                                         <td data-label="Price" class="ec-cart-pro-price text-center"><span class="amount"></span></td>
                                                         <td data-label="Total" class="ec-cart-pro-subtotal">
-                                                            <span class="tbl-btn"><button class="btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#checkout_modal_<?php echo $order_code; ?>">Add Payment</button></span>
+                                                            <span class="tbl-btn"><button class="btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#checkout_modal_<?php echo $item_order['order_id']; ?>">Add Payment</button></span>
                                                         </td>
                                                     </tr>
                                                 <?php }
