@@ -168,7 +168,10 @@ require_once('../app/partials/landing_head.php');
                                                     <td><span>Ksh <?php echo number_format($orders['bid_cost'], 2); ?></span></td>
                                                     <td><span><?php echo $orders['bid_status']; ?></span></td>
                                                     <td>
-                                                        <span class="tbl-btn"><a class="btn btn-lg btn-primary" href="landing_product?view=<?php echo $orders['product_id']; ?>&category=<?php echo $orders['product_category_id']; ?>">View</a></span>
+                                                        <span class="tbl-btn">
+                                                            <a class="btn btn-lg btn-primary" href="landing_product?view=<?php echo $orders['product_id']; ?>&category=<?php echo $orders['product_category_id']; ?>">View</a>
+                                                            <a class="btn btn-lg btn-danger" href="landing_my_bids?cancel_bid=<?php echo $orders['bid_id']; ?>">Cancel Bid</a>
+                                                        </span>
                                                     </td>
                                                 </tr>
                                             <?php  }
