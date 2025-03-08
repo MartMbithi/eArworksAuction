@@ -182,13 +182,13 @@ if ($user_access_level == 'Administrator') {
                     <li class="has-sub">
                         <a class="sidenav-item-link" href="javascript:void(0)">
                             <i class="mdi mdi-cart"></i>
-                            <span class="nav-text">Bids</span> <b class="caret"></b>
+                            <span class="nav-text">Orders</span> <b class="caret"></b>
                         </a>
                         <div class="collapse">
                             <ul class="sub-menu" id="orders" data-parent="#sidebar-menu">
                                 <li class="">
                                     <a class="sidenav-item-link" href="backoffice_manage_orders">
-                                        <span class="nav-text">Manage Bids</span>
+                                        <span class="nav-text">Manage Orders</span>
                                     </a>
                                 </li>
                                 <li class="">
