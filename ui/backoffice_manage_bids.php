@@ -70,7 +70,7 @@ require_once('../app/settings/config.php');
 require_once('../app/settings/codeGen.php');
 require_once('../app/settings/checklogin.php');
 checklogin();
-require_once('../app/helpers/orders.php');
+require_once('../app/helpers/bids.php');
 require_once('../app/partials/backoffice_head.php');
 ?>
 
@@ -141,7 +141,6 @@ require_once('../app/partials/backoffice_head.php');
                                                         } else {
                                                             $image_dir = "../public/uploads/products/" . $bids['product_image'];
                                                         }
-
                                                 ?>
                                                         <tr>
                                                             <td>
@@ -159,23 +158,30 @@ require_once('../app/partials/backoffice_head.php');
                                                                     echo '<span class="badge badge-warning">Pending</span>';
                                                                 } elseif ($bids['bid_status'] == 'Approved') {
                                                                     echo '<span class="badge badge-success">Approved</span>';
-                                                                } elseif ($bids['bid_status'] == 'Rejected') {
-                                                                    echo '<span class="badge badge-danger">Rejected</span>';
+                                                                } elseif ($bids['bid_status'] == 'Declined') {
+                                                                    echo '<span class="badge badge-danger">Declined</span>';
                                                                 }
                                                                 ?>
                                                             </td>
                                                             <td>Ksh <?php echo $bids['bid_date']; ?></td>
                                                             <td>
-                                                                <div class="btn-group mb-1">
-                                                                    <button type="button" class="btn btn-outline-success">Manage</button>
-                                                                    <button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-                                                                        <span class="sr-only">Manage</span>
-                                                                    </button>
-                                                                    <div class="dropdown-menu">
-                                                                        <a class="dropdown-item" data-bs-toggle="modal" href="#reject_<?php echo $bids['bid_id']; ?>">Accept Bid</a>
-                                                                        <a class="dropdown-item" data-bs-toggle="modal" href="#reject_<?php echo $bids['bid_id']; ?>">Reject Bid</a>
+                                                                <?php
+                                                                if ($bids['bid_status'] == 'Pending') { ?>
+                                                                    <div class="btn-group mb-1">
+                                                                        <button type="button" class="btn btn-outline-success">Manage</button>
+                                                                        <button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+                                                                            <span class="sr-only">Manage</span>
+                                                                        </button>
+                                                                        <div class="dropdown-menu">
+                                                                            <a class="dropdown-item" data-bs-toggle="modal" href="#accept_<?php echo $bids['bid_id']; ?>">Accept Bid</a>
+                                                                            <a class="dropdown-item" data-bs-toggle="modal" href="#reject_<?php echo $bids['bid_id']; ?>">Reject Bid</a>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
+                                                                <?php } elseif ($bids['bid_status'] == 'Approved') { ?>
+                                                                    <span class="badge badge-success">Approved</span>
+                                                                <?php } else { ?>
+                                                                    <span class="badge badge-danger">Declined</span>
+                                                                <?php } ?>
                                                             </td>
                                                         </tr>
                                                         <!-- Delete Staff Modal -->
