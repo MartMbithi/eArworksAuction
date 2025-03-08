@@ -145,7 +145,11 @@ if (isset($_POST['Approve_Bid'])) {
             /* Persist */
             $sql = "INSERT INTO orders (order_bid_id, order_user_id, order_product_id, order_code, order_date, order_cost, order_status, order_qty,  order_payment_status, order_estimated_delivery_date) VALUES(
             '{$order_bid_id}', '{$order_user_id}', '{$order_product_id}', '{$order_code}', '{$order_date}', '{$order_cost}', '{$order_status}', '{$order_qty}', '{$order_payment_status}', '{$order_estimated_delivery_date}')";
-            if (mysqli_query($mysqli, $sql) && mysqli_query($mysqli, $update_sql)) {
+
+            /* Update Bid Status */
+            $bid_status_sql = "UPDATE bids SET bid_status = 'Approved' WHERE bid_id = '{$order_bid_id}'";
+
+            if (mysqli_query($mysqli, $sql) && mysqli_query($mysqli, $update_sql) && mysqli_query($mysqli, $bid_status_sql)) {
                 $success = "Bid Processed And Order $order_code Added";
             } else {
                 $err = "Failed, try again";
