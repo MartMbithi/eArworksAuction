@@ -171,8 +171,9 @@ require_once('../app/partials/backoffice_head.php');
                                                                     </button>
 
                                                                     <div class="dropdown-menu">
-                                                                        <a class="dropdown-item" data-bs-toggle="modal" href="#update_order_status<?php echo $bids['bid_id']; ?>">Update Status</a>
-                                                                        <a class="dropdown-item" data-bs-toggle="modal" href="#delete_order_<?php echo $bids['bid_id']; ?>">Cancel Bid</a>
+                                                                        <a class="dropdown-item" data-bs-toggle="modal" href="#approve_<?php echo $bids['bid_id']; ?>">Accept Bid</a>
+                                                                        <a class="dropdown-item" data-bs-toggle="modal" href="#reject_<?php echo $bids['bid_id']; ?>">Reject Bid</a>
+                                                                        <a class="dropdown-item" data-bs-toggle="modal" href="#delete_bid<?php echo $bids['bid_id']; ?>">Cancel Bid</a>
                                                                     </div>
                                                                 </div>
                                                             </td>
