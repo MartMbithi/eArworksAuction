@@ -148,7 +148,8 @@ require_once('../app/partials/landing_head.php');
                                             AND c.category_delete_status = '0'
                                             AND p.product_delete_status = '0'
                                             AND b.bid_delete_status = '0'
-                                            AND u.user_id = '{$order_user_id}'"
+                                            AND u.user_id = '{$order_user_id}'
+                                            ORDER BY b.bid_id DESC"
                                         );
                                         if (mysqli_num_rows($orders_sql) > 0) {
                                             while ($orders = mysqli_fetch_array($orders_sql)) {
@@ -172,7 +173,7 @@ require_once('../app/partials/landing_head.php');
                                                             <?php if ($orders['bid_status'] == 'Approved') { ?>
                                                                 <a class="btn btn-lg btn-primary" href="landing_track_order_details?view=<?php echo $orders['bid_id']; ?>">View Order</a>
                                                             <?php } else { ?>
-                                                                <a class="btn btn-lg btn-danger" href="landing_my_bids?cancel_bid=<?php echo $orders['bid_id']; ?>">Cancel Bid</a>
+                                                                <a class="btn btn-lg btn-secondary" href="landing_my_bids?cancel_bid=<?php echo $orders['bid_id']; ?>">Manage Bid</a>
                                                             <?php } ?>
                                                         </span>
                                                     </td>
