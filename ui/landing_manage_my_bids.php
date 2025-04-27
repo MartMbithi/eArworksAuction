@@ -187,7 +187,7 @@ require_once('../app/partials/landing_head.php');
                                         <?php if ($orders['bid_status'] == 'Pending') { ?>
                                             <a class="btn btn-lg btn-danger" href="landing_my_bids?cancel_bid=<?php echo $orders['bid_id']; ?>">Cancel Bid</a>
                                         <?php } ?>
-                                        <a class="btn btn-lg btn-primary" href="landing_products">Edit My Bid</a>
+                                        <a href="#" class="btn btn-lg btn-primary" data-link-action="editmodal" title="Edit Detail" data-bs-toggle="modal" data-bs-target="#edit_modal">Edit My Bid</a>
                                     </div>
                                 </div>
                                 <div class="ec-vendor-card-body">
@@ -247,6 +247,8 @@ require_once('../app/partials/landing_head.php');
                     </div>
                 </div>
             </section>
+            <?php require_once('../app/modals/landing_manage_bids.php'); ?>
+
     <?php }
     } ?>
     <!-- Footer Start -->
