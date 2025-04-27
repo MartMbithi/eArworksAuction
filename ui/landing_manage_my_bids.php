@@ -1,6 +1,6 @@
 <?php
 /*
- *   Crafted On Fri Mar 07 2025
+ *   Crafted On Sat Mar 01 2025
  *   From his finger tips, through his IDE to your deployment environment at full throttle with no bugs, loss of data,
  *   fluctuations, signal interference, or doubt—it can only be
  *   the legendary coding wizard, Martin Mbithi (martin@devlan.co.ke, www.martmbithi.github.io)
@@ -69,7 +69,6 @@ session_start();
 require_once('../app/settings/checklogin.php');
 checklogin();
 require_once('../app/settings/config.php');
-require_once('../app/helpers/bids.php');
 require_once('../app/partials/landing_head.php');
 ?>
 
@@ -87,13 +86,13 @@ require_once('../app/partials/landing_head.php');
                 <div class="col-12">
                     <div class="row ec_breadcrumb_inner">
                         <div class="col-md-6 col-sm-12">
-                            <h2 class="ec-breadcrumb-title">My Bids</h2>
+                            <h2 class="ec-breadcrumb-title">Purchase History</h2>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <!-- ec-breadcrumb-list start -->
                             <ul class="ec-breadcrumb-list">
                                 <li class="ec-breadcrumb-item"><a href="../">Home</a></li>
-                                <li class="ec-breadcrumb-item active">My Bids</li>
+                                <li class="ec-breadcrumb-item active">Orders</li>
                             </ul>
                             <!-- ec-breadcrumb-list end -->
                         </div>
@@ -114,7 +113,7 @@ require_once('../app/partials/landing_head.php');
                 <div class="ec-shop-rightside col-lg-9 col-md-12">
                     <div class="ec-vendor-dashboard-card">
                         <div class="ec-vendor-card-header">
-                            <h5>My Bids</h5>
+                            <h5>Recent Orders</h5>
                             <div class="ec-header-btn">
                                 <a class="btn btn-lg btn-primary" href="landing_products">Shop Now</a>
                             </div>
@@ -125,12 +124,9 @@ require_once('../app/partials/landing_head.php');
                                     <thead>
                                         <tr>
                                             <th scope="col">ID</th>
-                                            <th scope="col">Image</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Date</th>
-                                            <th scope="col">QTY</th>
-                                            <th scope="col">Bid Price</th>
-                                            <th scope="col">Bid Status</th>
+                                            <th scope="col">Number Of Items</th>
+                                            <th scope="col">Order Date</th>
+                                            <th scope="col">Estimated Delivery Date</th>
                                             <th scope="col">Actions</th>
                                         </tr>
                                     </thead>
@@ -140,48 +136,46 @@ require_once('../app/partials/landing_head.php');
                                         $order_user_id = mysqli_real_escape_string($mysqli, $_SESSION['user_id']);
                                         $orders_sql = mysqli_query(
                                             $mysqli,
-                                            "SELECT * FROM bids b  
-                                            INNER JOIN products p ON p.product_id = b.bid_product_id
-                                            INNER JOIN users u ON u.user_id = b.bid_user_id
+                                            "SELECT * FROM orders o  
+                                            INNER JOIN products p ON p.product_id = o.order_product_id
+                                            INNER JOIN users u ON u.user_id = o.order_user_id
                                             INNER JOIN categories c ON c.category_id = p.product_category_id
                                             WHERE u.user_delete_status = '0' 
                                             AND c.category_delete_status = '0'
                                             AND p.product_delete_status = '0'
-                                            AND b.bid_delete_status = '0'
+                                            AND o.order_delete_status = '0'
                                             AND u.user_id = '{$order_user_id}'
-                                            ORDER BY b.bid_id DESC"
+                                            GROUP BY o.order_code
+                                            ORDER BY o.order_date DESC"
                                         );
                                         if (mysqli_num_rows($orders_sql) > 0) {
                                             while ($orders = mysqli_fetch_array($orders_sql)) {
-                                                /* Image Directory */
-                                                if ($orders['product_image'] == '') {
-                                                    $product_image_dir = "../public/uploads/products/no_image.png";
-                                                } else {
-                                                    $product_image_dir = "../public/uploads/products/" . $orders['product_image'];
-                                                }
+                                                /* Sum Number Of Items In The Order */
+                                                $query = "SELECT COUNT(*)  FROM orders WHERE order_code = '{$orders['order_code']}'";
+                                                $stmt = $mysqli->prepare($query);
+                                                $stmt->execute();
+                                                $stmt->bind_result($items_in_my_order);
+                                                $stmt->fetch();
+                                                $stmt->close();
                                         ?>
                                                 <tr>
-                                                    <th scope="row"><span><?php echo $orders['bid_code']; ?></span></th>
-                                                    <td><img class="prod-img" src="<?php echo $product_image_dir; ?>" alt="product image"></td>
-                                                    <td><span><?php echo $orders['product_name']; ?></span></td>
-                                                    <td><span><?php echo date('d M Y', strtotime($orders['bid_date'])); ?></span></td>
-                                                    <td><span><?php echo $orders['bid_qty']; ?></span></td>
-                                                    <td><span>Ksh <?php echo number_format($orders['bid_cost'], 2); ?></span></td>
-                                                    <td><span><?php echo $orders['bid_status']; ?></span></td>
+                                                    <th scope="row"><span><?php echo $orders['order_code']; ?></span></th>
+                                                    <td><span><?php echo $items_in_my_order; ?> Items</span></td>
+                                                    <td><span><?php echo date('d M Y', strtotime($orders['order_date'])); ?></span></td>
+                                                    <td><span><?php echo date('d M Y', strtotime($orders['order_estimated_delivery_date'])); ?></span></td>
                                                     <td>
                                                         <span class="tbl-btn">
-                                                            <?php if ($orders['bid_status'] == 'Approved') { ?>
-                                                                <a class="btn btn-lg btn-primary" href="landing_track_order_details?view=<?php echo $orders['bid_id']; ?>">View Order</a>
-                                                            <?php } else { ?>
-                                                                <a class="btn btn-lg btn-secondary" href="landing_manage_my_bids?bid=<?php echo $orders['bid_id']; ?>">Manage Bid</a>
-                                                            <?php } ?>
+                                                            <a class="btn btn-lg btn-primary" href="landing_track_order_details?view=<?php echo $orders['order_bid_id']; ?>">Track Order</a>
                                                         </span>
                                                     </td>
                                                 </tr>
-                                            <?php  }
+                                            <?php
+                                                /* Sales Payment Helper */
+                                                include('../app/modals/payment_modal.php');
+                                            }
                                         } else { ?>
                                             <tr>
-                                                <th scope="row">No Recent Bids</th>
+                                                <th scope="row">No Recent Orders</th>
                                             </tr>
                                         <?php } ?>
                                     </tbody>
