@@ -171,3 +171,28 @@ if (isset($_POST['Decline_Bid'])) {
         $err = "Failed To Decline Bid";
     }
 }
+
+/* Ammend Bids */
+if (isset($_POST['Ammend_Bid'])) {
+    $bid_id = mysqli_real_escape_string($mysqli, $_POST['bid_id']);
+    $old_bid_cost = mysqli_real_escape_string($mysqli, $_POST['old_bid_cost']);
+    $bid_cost = mysqli_real_escape_string($mysqli, $_POST['bid_cost']);
+    $bid_date = mysqli_real_escape_string($mysqli, $_POST['bid_date']);
+
+    /* Prevent Bidding Multiple Times On Artwork Before 4 hours Elapses */
+    if ($bid_cost < $old_bid_cost) {
+        $err = "Your New Bid Is Lower Than The Current Bid Amount";
+    } else {
+        if (mysqli_query(
+            $mysqli,
+            "UPDATE bids SET bid_cost = '{$bid_cost}', bid_date = '{$bid_date}' WHERE bid_id = '{$bid_id}'"
+        )) {
+            $success = "";
+            $_SESSION['success'] = "Bid Ammended Successfully";
+            header('Location: landing_my_bids');
+            exit;
+        } else {
+            $err = "Failed To Ammend Bid";
+        }
+    }
+}
