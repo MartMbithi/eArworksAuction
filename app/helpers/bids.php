@@ -179,7 +179,6 @@ if (isset($_POST['Ammend_Bid'])) {
     $bid_cost = mysqli_real_escape_string($mysqli, $_POST['bid_cost']);
     $bid_date = mysqli_real_escape_string($mysqli, $_POST['bid_date']);
 
-    /* Prevent Bidding Multiple Times On Artwork Before 4 hours Elapses */
     if ($bid_cost < $old_bid_cost) {
         $err = "Your New Bid Is Lower Than The Current Bid Amount";
     } else {
