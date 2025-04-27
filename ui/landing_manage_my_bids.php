@@ -79,7 +79,7 @@ require_once('../app/partials/landing_head.php');
     <?php require_once('../app/partials/landing_navigation.php'); ?>
     <!-- Header End  -->
     <?php
-    $orders_sql = mysqli_query(
+    $bid_sql = mysqli_query(
         $mysqli,
         "SELECT * FROM bids b  
         INNER JOIN products p ON p.product_id = b.bid_product_id
@@ -93,13 +93,13 @@ require_once('../app/partials/landing_head.php');
         AND b.bid_id = '{$_GET['bid']}'
         ORDER BY b.bid_id DESC"
     );
-    if (mysqli_num_rows($orders_sql) > 0) {
-        while ($orders = mysqli_fetch_array($orders_sql)) {
+    if (mysqli_num_rows($bid_sql) > 0) {
+        while ($order = mysqli_fetch_array($bid_sql)) {
             /* Image Directory */
-            if ($orders['product_image'] == '') {
+            if ($order['product_image'] == '') {
                 $product_image_dir = "../public/uploads/products/no_image.png";
             } else {
-                $product_image_dir = "../public/uploads/products/" . $orders['product_image'];
+                $product_image_dir = "../public/uploads/products/" . $order['product_image'];
             }
     ?>
             <!-- Ec breadcrumb start -->
@@ -109,14 +109,14 @@ require_once('../app/partials/landing_head.php');
                         <div class="col-12">
                             <div class="row ec_breadcrumb_inner">
                                 <div class="col-md-6 col-sm-12">
-                                    <h2 class="ec-breadcrumb-title">Bid - <?php echo $orders['bid_code']; ?> Details </h2>
+                                    <h2 class="ec-breadcrumb-title">Bid - <?php echo $order['bid_code']; ?> Details </h2>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <!-- ec-breadcrumb-list start -->
                                     <ul class="ec-breadcrumb-list">
                                         <li class="ec-breadcrumb-item"><a href="../">Home</a></li>
                                         <li class="ec-breadcrumb-item"><a href="landing_my_bids">Bids</a></li>
-                                        <li class="ec-breadcrumb-item active"><?php echo $orders['bid_code']; ?></li>
+                                        <li class="ec-breadcrumb-item active"><?php echo $order['bid_code']; ?></li>
                                     </ul>
                                     <!-- ec-breadcrumb-list end -->
                                 </div>
@@ -145,7 +145,7 @@ require_once('../app/partials/landing_head.php');
                                         </div>
                                         <div class="single-pro-desc">
                                             <div class="single-pro-content">
-                                                <h5 class="ec-single-title"><?php echo $orders['product_name']; ?></h5>
+                                                <h5 class="ec-single-title"><?php echo $order['product_name']; ?></h5>
                                                 <div class="ec-single-rating-wrap">
                                                     <div class="ec-single-rating">
                                                         <i class="ecicon eci-star fill"></i>
@@ -157,7 +157,7 @@ require_once('../app/partials/landing_head.php');
                                                 </div>
                                                 <div class="ec-single-price-stoke">
                                                     <div class="ec-single-price">
-                                                        <span class="new-price">My Bid Price <?php echo number_format($orders['bid_cost'], 2); ?></span>
+                                                        <span class="new-price">My Bid Price <?php echo number_format($order['bid_cost'], 2); ?></span>
                                                     </div>
 
                                                 </div>
@@ -165,9 +165,9 @@ require_once('../app/partials/landing_head.php');
                                                     <div class="ec-single-price-stoke">
                                                         <div class="ec-single-price">
                                                             <span class="ec-single-ps-title">Seller Details</span>
-                                                            <span class="new-price">Name : <?php echo $orders['user_first_name'] . ' ' . $orders['user_last_name']; ?> </span>
+                                                            <span class="new-price">Name : <?php echo $order['user_first_name'] . ' ' . $order['user_last_name']; ?> </span>
                                                             <span class="new-price">Email : <?php echo $orders['user_email']; ?> </span>
-                                                            <span class="new-price">Contacts : <?php echo $orders['user_phone_number']; ?></span>
+                                                            <span class="new-price">Contacts : <?php echo $order['user_phone_number']; ?></span>
 
                                                         </div>
                                                     </div>
@@ -184,8 +184,8 @@ require_once('../app/partials/landing_head.php');
                                 <div class="ec-vendor-card-header">
                                     <h5>Other Bidders History</h5>
                                     <div class="ec-header-btn">
-                                        <?php if ($orders['bid_status'] == 'Pending') { ?>
-                                            <a class="btn btn-lg btn-danger" href="landing_my_bids?cancel_bid=<?php echo $orders['bid_id']; ?>">Cancel Bid</a>
+                                        <?php if ($order['bid_status'] == 'Pending') { ?>
+                                            <a class="btn btn-lg btn-danger" href="landing_my_bids?cancel_bid=<?php echo $order['bid_id']; ?>">Cancel Bid</a>
                                         <?php } ?>
                                         <a href="#" class="btn btn-lg btn-primary" data-link-action="editmodal" title="Edit Detail" data-bs-toggle="modal" data-bs-target="#edit_modal">Edit My Bid</a>
                                     </div>
@@ -218,7 +218,7 @@ require_once('../app/partials/landing_head.php');
                                                     AND p.product_delete_status = '0'
                                                     AND b.bid_delete_status = '0'
                                                     AND u.user_id != '{$order_user_id}'
-                                                    AND b.bid_product_id = '{$orders['bid_product_id']}'
+                                                    AND b.bid_product_id = '{$order['bid_product_id']}'
                                                     ORDER BY b.bid_id DESC"
                                                 );
                                                 if (mysqli_num_rows($orders_sql) > 0) {
