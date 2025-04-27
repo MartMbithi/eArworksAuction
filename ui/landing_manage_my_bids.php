@@ -126,12 +126,10 @@ require_once('../app/partials/landing_head.php');
                 </div>
             </div>
             <!-- Ec breadcrumb end -->
-
-            <!-- User history section -->
-            <section class="ec-page-content section-space-p">
+            <section class="ec-page-content ec-vendor-uploads ec-user-account section-space-p">
                 <div class="container">
                     <div class="row">
-                        <div class="ec-pro-rightside ec-common-rightside col-lg-12 order-lg-last col-md-12 order-md-first">
+                        <div class="ec-pro-rightside ec-common-rightside col-lg-12 col-md-12">
                             <!-- Single product content Start -->
                             <div class="single-pro-block">
                                 <div class="single-pro-inner">
@@ -179,78 +177,76 @@ require_once('../app/partials/landing_head.php');
                                     </div>
                                 </div>
                             </div>
-                            <!--Single product content End -->
-                            <div class="ec-single-pro-tab">
-                                <div class="ec-single-pro-tab-wrapper">
-                                    <div class="ec-single-pro-tab-nav">
-                                        <ul class="nav nav-tabs">
-                                            <li class="nav-item">
-                                                <a class="nav-link active" data-bs-toggle="tab" data-bs-target="#ec-spt-nav-details" role="tablist">Other Bidders History</a>
-                                            </li>
-                                        </ul>
+                        </div>
+
+                        <div class="ec-shop-rightside col-lg-12 col-md-12">
+                            <div class="ec-vendor-dashboard-card">
+                                <div class="ec-vendor-card-header">
+                                    <h5>Other Bidders History</h5>
+                                    <div class="ec-header-btn">
+                                        <?php if ($orders['bid_status'] == 'Pending') { ?>
+                                            <a class="btn btn-lg btn-danger" href="landing_my_bids?cancel_bid=<?php echo $orders['bid_id']; ?>">Cancel Bid</a>
+                                        <?php } ?>
+                                        <a class="btn btn-lg btn-primary" href="landing_products">Edit My Bid</a>
                                     </div>
-                                    <div class="tab-content  ec-single-pro-tab-content">
-                                        <div id="ec-spt-nav-details" class="tab-pane fade show active">
-                                            <div class="ec-single-pro-tab-desc">
-                                                <table class="table ec-table">
-                                                    <thead>
+                                </div>
+                                <div class="ec-vendor-card-body">
+                                    <div class="ec-vendor-card-table">
+                                        <table class="table ec-table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">ID</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Date</th>
+                                                    <th scope="col">QTY</th>
+                                                    <th scope="col">Bid Price</th>
+                                                    <th scope="col">Bid Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                /* Pull Recent Purchases Made By This User */
+                                                $order_user_id = mysqli_real_escape_string($mysqli, $_SESSION['user_id']);
+                                                $orders_sql = mysqli_query(
+                                                    $mysqli,
+                                                    "SELECT * FROM bids b  
+                                                    INNER JOIN products p ON p.product_id = b.bid_product_id
+                                                    INNER JOIN users u ON u.user_id = b.bid_user_id
+                                                    INNER JOIN categories c ON c.category_id = p.product_category_id
+                                                    WHERE u.user_delete_status = '0' 
+                                                    AND c.category_delete_status = '0'
+                                                    AND p.product_delete_status = '0'
+                                                    AND b.bid_delete_status = '0'
+                                                    AND u.user_id != '{$order_user_id}'
+                                                    AND b.bid_product_id = '{$orders['bid_product_id']}'
+                                                    ORDER BY b.bid_id DESC"
+                                                );
+                                                if (mysqli_num_rows($orders_sql) > 0) {
+                                                    while ($orders = mysqli_fetch_array($orders_sql)) {
+                                                ?>
                                                         <tr>
-                                                            <th scope="col">ID</th>
-                                                            <th scope="col">Name</th>
-                                                            <th scope="col">Date</th>
-                                                            <th scope="col">QTY</th>
-                                                            <th scope="col">Bid Price</th>
-                                                            <th scope="col">Bid Status</th>
+                                                            <th scope="row"><span><?php echo $orders['bid_code']; ?></span></th>
+                                                            <td><span><?php echo $orders['user_first_name'] . ' ' . $orders['user_last_name']; ?></span></td>
+                                                            <td><span><?php echo date('d M Y', strtotime($orders['bid_date'])); ?></span></td>
+                                                            <td><span><?php echo $orders['bid_qty']; ?></span></td>
+                                                            <td><span>Ksh <?php echo number_format($orders['bid_cost'], 2); ?></span></td>
+                                                            <td><span><?php echo $orders['bid_status']; ?></span></td>
                                                         </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php
-                                                        /* Pull Recent Purchases Made By This User */
-                                                        $order_user_id = mysqli_real_escape_string($mysqli, $_SESSION['user_id']);
-                                                        $orders_sql = mysqli_query(
-                                                            $mysqli,
-                                                            "SELECT * FROM bids b  
-                                                            INNER JOIN products p ON p.product_id = b.bid_product_id
-                                                            INNER JOIN users u ON u.user_id = b.bid_user_id
-                                                            INNER JOIN categories c ON c.category_id = p.product_category_id
-                                                            WHERE u.user_delete_status = '0' 
-                                                            AND c.category_delete_status = '0'
-                                                            AND p.product_delete_status = '0'
-                                                            AND b.bid_delete_status = '0'
-                                                            AND u.user_id != '{$order_user_id}'
-                                                            AND b.bid_product_id = '{$orders['bid_product_id']}'
-                                                            ORDER BY b.bid_id DESC"
-                                                        );
-                                                        if (mysqli_num_rows($orders_sql) > 0) {
-                                                            while ($orders = mysqli_fetch_array($orders_sql)) {
-                                                        ?>
-                                                                <tr>
-                                                                    <th scope="row"><span><?php echo $orders['bid_code']; ?></span></th>
-                                                                    <td><span><?php echo $orders['user_first_name'] . ' ' . $orders['user_last_name']; ?></span></td>
-                                                                    <td><span><?php echo date('d M Y', strtotime($orders['bid_date'])); ?></span></td>
-                                                                    <td><span><?php echo $orders['bid_qty']; ?></span></td>
-                                                                    <td><span>Ksh <?php echo number_format($orders['bid_cost'], 2); ?></span></td>
-                                                                    <td><span><?php echo $orders['bid_status']; ?></span></td>
-                                                                </tr>
-                                                            <?php  }
-                                                        } else { ?>
-                                                            <tr>
-                                                                <th scope="row">You are the only one who has placed a bid on this artwork</th>
-                                                            </tr>
-                                                        <?php } ?>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
+                                                    <?php  }
+                                                } else { ?>
+                                                    <tr>
+                                                        <th scope="row">You are the only one who has placed a bid on this artwork</th>
+                                                    </tr>
+                                                <?php } ?>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
-                            <!-- product details description area end -->
                         </div>
                     </div>
                 </div>
             </section>
-            <!-- End User history section -->
     <?php }
     } ?>
     <!-- Footer Start -->
