@@ -201,7 +201,6 @@ require_once('../app/partials/landing_head.php');
                                                             <th scope="col">QTY</th>
                                                             <th scope="col">Bid Price</th>
                                                             <th scope="col">Bid Status</th>
-                                                            <th scope="col">Actions</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -227,7 +226,7 @@ require_once('../app/partials/landing_head.php');
                                                         ?>
                                                                 <tr>
                                                                     <th scope="row"><span><?php echo $orders['bid_code']; ?></span></th>
-                                                                    <td><span><?php echo $orders['product_name']; ?></span></td>
+                                                                    <td><span><?php echo $orders['user_first_name'] . ' ' . $orders['user_last_name']; ?></span></td>
                                                                     <td><span><?php echo date('d M Y', strtotime($orders['bid_date'])); ?></span></td>
                                                                     <td><span><?php echo $orders['bid_qty']; ?></span></td>
                                                                     <td><span>Ksh <?php echo number_format($orders['bid_cost'], 2); ?></span></td>
