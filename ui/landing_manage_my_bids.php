@@ -109,13 +109,14 @@ require_once('../app/partials/landing_head.php');
                         <div class="col-12">
                             <div class="row ec_breadcrumb_inner">
                                 <div class="col-md-6 col-sm-12">
-                                    <h2 class="ec-breadcrumb-title">Purchase History</h2>
+                                    <h2 class="ec-breadcrumb-title">Bid - <?php echo $orders['bid_code']; ?> Details </h2>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                     <!-- ec-breadcrumb-list start -->
                                     <ul class="ec-breadcrumb-list">
                                         <li class="ec-breadcrumb-item"><a href="../">Home</a></li>
-                                        <li class="ec-breadcrumb-item active">Orders</li>
+                                        <li class="ec-breadcrumb-item"><a href="landing_my_bids">Bids</a></li>
+                                        <li class="ec-breadcrumb-item active"><?php echo $orders['bid_code']; ?></li>
                                     </ul>
                                     <!-- ec-breadcrumb-list end -->
                                 </div>
@@ -127,89 +128,7 @@ require_once('../app/partials/landing_head.php');
             <!-- Ec breadcrumb end -->
 
             <!-- User history section -->
-            <section class="ec-page-content ec-vendor-uploads ec-user-account section-space-p">
-                <div class="container">
-                    <div class="row">
-                        <!-- Sidebar Area Start -->
-                        <?php require_once('../app/partials/landing_profile_sidebar.php'); ?>
-
-                        <div class="ec-shop-rightside col-lg-9 col-md-12">
-                            <div class="ec-vendor-dashboard-card">
-                                <div class="ec-vendor-card-header">
-                                    <h5>Recent Orders</h5>
-                                    <div class="ec-header-btn">
-                                        <a class="btn btn-lg btn-primary" href="landing_products">Shop Now</a>
-                                    </div>
-                                </div>
-                                <div class="ec-vendor-card-body">
-                                    <div class="ec-vendor-card-table">
-                                        <table class="table ec-table">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">ID</th>
-                                                    <th scope="col">Number Of Items</th>
-                                                    <th scope="col">Order Date</th>
-                                                    <th scope="col">Estimated Delivery Date</th>
-                                                    <th scope="col">Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                /* Pull Recent Purchases Made By This User */
-                                                $order_user_id = mysqli_real_escape_string($mysqli, $_SESSION['user_id']);
-                                                $orders_sql = mysqli_query(
-                                                    $mysqli,
-                                                    "SELECT * FROM orders o  
-                                            INNER JOIN products p ON p.product_id = o.order_product_id
-                                            INNER JOIN users u ON u.user_id = o.order_user_id
-                                            INNER JOIN categories c ON c.category_id = p.product_category_id
-                                            WHERE u.user_delete_status = '0' 
-                                            AND c.category_delete_status = '0'
-                                            AND p.product_delete_status = '0'
-                                            AND o.order_delete_status = '0'
-                                            AND u.user_id = '{$order_user_id}'
-                                            GROUP BY o.order_code
-                                            ORDER BY o.order_date DESC"
-                                                );
-                                                if (mysqli_num_rows($orders_sql) > 0) {
-                                                    while ($orders = mysqli_fetch_array($orders_sql)) {
-                                                        /* Sum Number Of Items In The Order */
-                                                        $query = "SELECT COUNT(*)  FROM orders WHERE order_code = '{$orders['order_code']}'";
-                                                        $stmt = $mysqli->prepare($query);
-                                                        $stmt->execute();
-                                                        $stmt->bind_result($items_in_my_order);
-                                                        $stmt->fetch();
-                                                        $stmt->close();
-                                                ?>
-                                                        <tr>
-                                                            <th scope="row"><span><?php echo $orders['order_code']; ?></span></th>
-                                                            <td><span><?php echo $items_in_my_order; ?> Items</span></td>
-                                                            <td><span><?php echo date('d M Y', strtotime($orders['order_date'])); ?></span></td>
-                                                            <td><span><?php echo date('d M Y', strtotime($orders['order_estimated_delivery_date'])); ?></span></td>
-                                                            <td>
-                                                                <span class="tbl-btn">
-                                                                    <a class="btn btn-lg btn-primary" href="landing_track_order_details?view=<?php echo $orders['order_bid_id']; ?>">Track Order</a>
-                                                                </span>
-                                                            </td>
-                                                        </tr>
-                                                    <?php
-                                                        /* Sales Payment Helper */
-                                                        include('../app/modals/payment_modal.php');
-                                                    }
-                                                } else { ?>
-                                                    <tr>
-                                                        <th scope="row">No Recent Orders</th>
-                                                    </tr>
-                                                <?php } ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+           
             <!-- End User history section -->
     <?php }
     } ?>
